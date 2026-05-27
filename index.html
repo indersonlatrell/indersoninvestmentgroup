@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inderson Investment Group</title>
@@ -879,6 +880,308 @@
     </div>
   </div>
 </section>
+
+<!-- TRACK RECORD SECTION -->
+<section style="padding: 130px 60px; background: var(--off-black);" id="track-record">
+
+  <p class="section-tag">Track Record</p>
+  <h2 class="section-title">Performance built on<br><em>verified discipline.</em></h2>
+
+  <!-- STATS ROW -->
+  <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:rgba(201,169,110,0.1); margin-bottom:48px;">
+    <div style="background:var(--off-black); padding:28px 24px;">
+      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Total Return (YTD)</div>
+      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:#6fcf97; line-height:1;"><em>+31.4%</em></div>
+    </div>
+    <div style="background:var(--off-black); padding:28px 24px;">
+      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Win Rate</div>
+      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:var(--white); line-height:1;"><em>68</em><span style="font-size:22px; color:var(--gold-dim)">%</span></div>
+    </div>
+    <div style="background:var(--off-black); padding:28px 24px;">
+      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Avg Risk:Reward</div>
+      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:var(--white); line-height:1;"><em>1</em><span style="font-size:22px; color:var(--gold-dim)">:</span><em>2.4</em></div>
+    </div>
+    <div style="background:var(--off-black); padding:28px 24px;">
+      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Max Drawdown</div>
+      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:#eb5757; line-height:1;"><em>−6.2%</em></div>
+    </div>
+    <div style="background:var(--off-black); padding:28px 24px;">
+      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Total Trades</div>
+      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:var(--white); line-height:1;"><em>184</em></div>
+    </div>
+  </div>
+
+  <!-- FILTER BUTTONS -->
+  <div style="display:flex; gap:8px; margin-bottom:20px;">
+    <button class="tr-filter active" onclick="trSetFilter('all',this)">All time</button>
+    <button class="tr-filter" onclick="trSetFilter('6m',this)">6 months</button>
+    <button class="tr-filter" onclick="trSetFilter('3m',this)">3 months</button>
+    <button class="tr-filter" onclick="trSetFilter('1m',this)">1 month</button>
+  </div>
+
+  <!-- EQUITY CURVE + PAIR BREAKDOWN -->
+  <div style="display:grid; grid-template-columns:2fr 1fr; gap:2px; background:rgba(201,169,110,0.1); margin-bottom:2px;">
+    <div style="background:var(--off-black); padding:32px;">
+      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:24px;">Equity curve</div>
+      <div style="position:relative; width:100%; height:200px;">
+        <canvas id="tr-equityChart" role="img" aria-label="Equity curve showing portfolio growth of 31.4% over 12 months">Portfolio grew from 100% to 131.4% across 12 months.</canvas>
+      </div>
+    </div>
+    <div style="background:var(--off-black); padding:32px;">
+      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:24px;">P&amp;L by pair</div>
+      <div id="tr-pairBars" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
+  </div>
+
+  <!-- MONTHLY HEATMAP -->
+  <div style="background:var(--off-black); padding:32px; margin-bottom:2px;">
+    <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:24px;">Monthly returns</div>
+    <div id="tr-heatmap" style="display:grid; grid-template-columns:repeat(12,1fr); gap:3px;"></div>
+  </div>
+
+  <!-- TRADE LOG -->
+  <div style="background:var(--off-black);">
+    <div style="display:grid; grid-template-columns:100px 90px 70px 70px 70px 70px 1fr; padding:14px 32px; border-bottom:1px solid rgba(201,169,110,0.1);">
+      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Date</div>
+      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Pair</div>
+      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Dir</div>
+      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Entry</div>
+      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Exit</div>
+      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">P&amp;L (R)</div>
+      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Strategy</div>
+    </div>
+    <div id="tr-tradeLog"></div>
+    <div style="padding:20px 32px; background:rgba(201,169,110,0.04); border-top:1px solid rgba(201,169,110,0.1); display:flex; align-items:center; gap:12px;">
+      <div style="width:6px; height:6px; border-radius:50%; background:var(--gold-dim); flex-shrink:0;"></div>
+      <div style="font-size:10px; font-weight:300; color:var(--gold-dim); letter-spacing:0.05em;">
+        Placeholder data — replace <code style="font-family:monospace; color:var(--gold); background:rgba(201,169,110,0.1); padding:2px 6px; border-radius:2px; font-size:9px;">trFetchTrades()</code> with your Notion API endpoint to go live.
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TRACK RECORD STYLES -->
+<style>
+  .tr-filter {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid rgba(201,169,110,0.2);
+    background: transparent;
+    color: var(--white-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tr-filter.active, .tr-filter:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .tr-log-row {
+    display: grid;
+    grid-template-columns: 100px 90px 70px 70px 70px 70px 1fr;
+    padding: 14px 32px;
+    border-bottom: 1px solid rgba(201,169,110,0.06);
+    transition: background 0.15s;
+    cursor: default;
+  }
+  .tr-log-row:hover { background: rgba(201,169,110,0.03); }
+  .tr-log-cell {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--white-dim);
+    display: flex;
+    align-items: center;
+  }
+  .tr-log-cell.pair { font-weight: 500; color: var(--white); letter-spacing: 0.05em; }
+  .tr-log-cell.pos  { color: #6fcf97; font-weight: 500; }
+  .tr-log-cell.neg  { color: #eb5757; font-weight: 500; }
+  .tr-badge-dir {
+    font-size: 8px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 2px;
+  }
+  .tr-badge-strat {
+    font-size: 8px; font-weight: 500; letter-spacing: 0.08em;
+    padding: 3px 8px; border-radius: 2px;
+    background: rgba(201,169,110,0.1); color: var(--gold);
+  }
+</style>
+
+<!-- TRACK RECORD SCRIPTS -->
+<script>
+(function() {
+
+  /* ── DATA ─────────────────────────────────────────────────────────────────
+     Replace trFetchTrades() with fetch('YOUR_NOTION_PROXY_URL').then(r=>r.json())
+     Each trade: { date, pair, direction, entry, exit, pnl_r, strategy }
+  ───────────────────────────────────────────────────────────────────────── */
+  function trFetchTrades() {
+    return [
+      { date:'2024-10-28', pair:'GBP/USD', direction:'long',  entry:'1.2980', exit:'1.3041', pnl_r:+2.1, strategy:'Trend Continuation' },
+      { date:'2024-10-24', pair:'EUR/USD', direction:'short', entry:'1.0892', exit:'1.0861', pnl_r:+1.6, strategy:'Mean Reversion' },
+      { date:'2024-10-21', pair:'USD/JPY', direction:'long',  entry:'149.40', exit:'149.12', pnl_r:-1.0, strategy:'Breakout' },
+      { date:'2024-10-17', pair:'GOLD',    direction:'long',  entry:'2371.0', exit:'2398.5', pnl_r:+2.8, strategy:'Macro Alignment' },
+      { date:'2024-10-14', pair:'AUD/USD', direction:'short', entry:'0.6580', exit:'0.6561', pnl_r:+0.9, strategy:'Mean Reversion' },
+      { date:'2024-10-10', pair:'EUR/GBP', direction:'long',  entry:'0.8590', exit:'0.8612', pnl_r:+1.4, strategy:'Trend Continuation' },
+      { date:'2024-10-07', pair:'USD/CHF', direction:'short', entry:'0.9041', exit:'0.9068', pnl_r:-1.0, strategy:'Breakout' },
+      { date:'2024-10-03', pair:'GBP/JPY', direction:'long',  entry:'193.80', exit:'194.92', pnl_r:+3.2, strategy:'Macro Alignment' },
+    ];
+  }
+
+  const trMonthly = [
+    { m:'JAN', r:+4.1 }, { m:'FEB', r:+2.8 }, { m:'MAR', r:-1.4 },
+    { m:'APR', r:+5.2 }, { m:'MAY', r:+3.7 }, { m:'JUN', r:-0.8 },
+    { m:'JUL', r:+4.9 }, { m:'AUG', r:+2.1 }, { m:'SEP', r:+1.6 },
+    { m:'OCT', r:+6.3 }, { m:'NOV', r:+3.2 }, { m:'DEC', r:+0.0 },
+  ];
+
+  const trPairs = [
+    { name:'GOLD',    pnl:+8.4 },
+    { name:'GBP/USD', pnl:+6.9 },
+    { name:'EUR/USD', pnl:+5.2 },
+    { name:'GBP/JPY', pnl:+4.1 },
+    { name:'USD/JPY', pnl:+3.8 },
+    { name:'AUD/USD', pnl:+2.3 },
+    { name:'USD/CHF', pnl:-1.3 },
+  ];
+
+  const trDatasets = {
+    all: { labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Now'], data:[100,102.1,104.8,103.5,107.9,111.4,110.7,114.9,116.8,118.2,122.9,125.8,131.4] },
+    '6m': { labels:['May','Jun','Jul','Aug','Sep','Oct','Now'],  data:[110.7,114.9,116.8,118.2,122.9,125.8,131.4] },
+    '3m': { labels:['Aug','Sep','Oct','Now'],                    data:[116.8,118.2,122.9,125.8,131.4] },
+    '1m': { labels:['Oct W1','Oct W2','Oct W3','Oct W4','Now'],  data:[122.9,124.1,125.8,129.0,131.4] },
+  };
+
+  let trChart;
+
+  function trBuildChart(key) {
+    const { labels, data } = trDatasets[key];
+    const ctx = document.getElementById('tr-equityChart').getContext('2d');
+    if (trChart) trChart.destroy();
+    trChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          data,
+          borderColor: '#c9a96e',
+          borderWidth: 1.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: '#c9a96e',
+          tension: 0.4,
+          fill: true,
+          backgroundColor: (ctx2) => {
+            const g = ctx2.chart.ctx.createLinearGradient(0,0,0,200);
+            g.addColorStop(0,'rgba(201,169,110,0.15)');
+            g.addColorStop(1,'rgba(201,169,110,0)');
+            return g;
+          }
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1a1a1a', borderColor: '#8a7050', borderWidth: 0.5,
+            titleColor: '#d4d0c8', bodyColor: '#c9a96e',
+            callbacks: { label: (c) => ' ' + c.parsed.y.toFixed(1) + '%' }
+          }
+        },
+        scales: {
+          x: { grid: { color:'rgba(201,169,110,0.06)' }, ticks: { color:'#8a7050', font:{ family:'Montserrat', size:9 }, maxRotation:0 } },
+          y: { grid: { color:'rgba(201,169,110,0.06)' }, ticks: { color:'#8a7050', font:{ family:'Montserrat', size:9 }, callback: v => v.toFixed(0)+'%' }, min: 95 }
+        }
+      }
+    });
+  }
+
+  window.trSetFilter = function(key, btn) {
+    document.querySelectorAll('.tr-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    trBuildChart(key);
+  };
+
+  function trBuildHeatmap() {
+    const el = document.getElementById('tr-heatmap');
+    const max = Math.max(...trMonthly.map(d => Math.abs(d.r)));
+    trMonthly.forEach(d => {
+      const pct = Math.abs(d.r) / max;
+      let bg, textColor;
+      if (d.r === 0) { bg = 'rgba(201,169,110,0.05)'; textColor = '#8a7050'; }
+      else if (d.r > 0) {
+        bg = `rgba(111,207,151,${(0.15 + pct * 0.7).toFixed(2)})`;
+        textColor = d.r > 3 ? '#0a2e1a' : '#1a4a2a';
+      } else {
+        bg = `rgba(235,87,87,${(0.15 + pct * 0.7).toFixed(2)})`;
+        textColor = '#3a0a0a';
+      }
+      const sign = d.r > 0 ? '+' : '';
+      const cell = document.createElement('div');
+      cell.style.cssText = 'text-align:center;';
+      cell.innerHTML = `
+        <div style="font-size:8px; letter-spacing:0.1em; color:#8a7050; margin-bottom:4px; text-transform:uppercase;">${d.m}</div>
+        <div style="height:40px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:500; background:${bg}; color:${textColor}; cursor:default;">
+          ${d.r === 0 ? '—' : sign + d.r.toFixed(1) + '%'}
+        </div>`;
+      el.appendChild(cell);
+    });
+  }
+
+  function trBuildPairs() {
+    const el = document.getElementById('tr-pairBars');
+    const max = Math.max(...trPairs.map(d => Math.abs(d.pnl)));
+    trPairs.forEach(d => {
+      const pct = (Math.abs(d.pnl) / max * 100).toFixed(1);
+      const color = d.pnl >= 0 ? '#6fcf97' : '#eb5757';
+      const sign = d.pnl >= 0 ? '+' : '';
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex; flex-direction:column; gap:4px;';
+      row.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:10px; font-weight:500; letter-spacing:0.05em; color:#f5f3ef;">${d.name}</span>
+          <span style="font-size:10px; font-weight:500; color:${color};">${sign}${d.pnl.toFixed(1)}R</span>
+        </div>
+        <div style="height:4px; background:rgba(201,169,110,0.1); border-radius:2px; overflow:hidden;">
+          <div style="height:100%; border-radius:2px; width:${pct}%; background:${color}; opacity:0.7;"></div>
+        </div>`;
+      el.appendChild(row);
+    });
+  }
+
+  function trBuildLog() {
+    const trades = trFetchTrades();
+    const el = document.getElementById('tr-tradeLog');
+    trades.forEach(t => {
+      const pos = t.pnl_r >= 0;
+      const sign = pos ? '+' : '';
+      const dirBg = t.direction === 'long' ? 'rgba(111,207,151,0.12)' : 'rgba(235,87,87,0.12)';
+      const dirColor = t.direction === 'long' ? '#6fcf97' : '#eb5757';
+      const row = document.createElement('div');
+      row.className = 'tr-log-row';
+      row.innerHTML = `
+        <div class="tr-log-cell">${t.date}</div>
+        <div class="tr-log-cell pair">${t.pair}</div>
+        <div class="tr-log-cell"><span class="tr-badge-dir" style="background:${dirBg}; color:${dirColor};">${t.direction.toUpperCase()}</span></div>
+        <div class="tr-log-cell">${t.entry}</div>
+        <div class="tr-log-cell">${t.exit}</div>
+        <div class="tr-log-cell ${pos?'pos':'neg'}">${sign}${t.pnl_r.toFixed(1)}R</div>
+        <div class="tr-log-cell"><span class="tr-badge-strat">${t.strategy}</span></div>`;
+      el.appendChild(row);
+    });
+  }
+
+  trBuildChart('all');
+  trBuildHeatmap();
+  trBuildPairs();
+  trBuildLog();
+
+})();
+</script>
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
