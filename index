@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inderson Investment Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --dark: #1a1a1a;
+    --mid: #2e2e2e;
+    --gold: #c9a96e;
+    --gold-light: #e2c99a;
+    --gold-dim: #8a7050;
+    --white: #f5f3ef;
+    --white-dim: #d4d0c8;
+    --cream: #ede9e0;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Montserrat', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 60px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .nav-logo-mark {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .nav-logo-name {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--white);
+  }
+
+  .nav-logo-sub {
+    font-family: var(--sans);
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--white-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 60px 80px 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(52px, 6vw, 84px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--white-dim);
+    max-width: 400px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 16px 40px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--gold); }
+
+  .btn-ghost::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s;
+  }
+
+  .btn-ghost:hover::after { width: 48px; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-visual {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      linear-gradient(rgba(201,169,110,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,169,110,1) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-chart-svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: fadeIn 1.5s 1s forwards;
+  }
+
+  .ticker-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(201,169,110,0.08);
+    border-top: 1px solid rgba(201,169,110,0.2);
+    padding: 12px 60px;
+    display: flex;
+    gap: 48px;
+    overflow: hidden;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  .ticker-pair { color: var(--white-dim); }
+  .ticker-val { color: var(--white); }
+  .ticker-chg.up { color: #6fcf97; }
+  .ticker-chg.dn { color: #eb5757; }
+
+  .hero-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.3) 30%, rgba(201,169,110,0.3) 70%, transparent);
+    z-index: 3;
+  }
+
+  /* STATS */
+  .stats-section {
+    padding: 100px 60px;
+    border-top: 1px solid rgba(201,169,110,0.12);
+    border-bottom: 1px solid rgba(201,169,110,0.12);
+    background: var(--off-black);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,169,110,0.12);
+  }
+
+  .stat-cell {
+    background: var(--off-black);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .stat-cell:hover { background: rgba(201,169,110,0.04); }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-num span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  /* ABOUT */
+  .about-section {
+    padding: 130px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .section-tag {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(38px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold-light); }
+
+  .section-body {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--white-dim);
+    margin-bottom: 20px;
+  }
+
+  .about-geo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .geo-card {
+    padding: 28px 32px;
+    border: 1px solid rgba(201,169,110,0.15);
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .geo-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .geo-card:hover { border-color: rgba(201,169,110,0.4); }
+  .geo-card:hover::before { opacity: 1; }
+
+  .geo-market {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .geo-desc {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--white-dim);
+  }
+
+  /* STRATEGY */
+  .strategy-section {
+    padding: 130px 60px;
+    background: var(--off-black);
+  }
+
+  .strategy-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 80px;
+  }
+
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(201,169,110,0.1);
+  }
+
+  .strategy-card {
+    background: var(--off-black);
+    padding: 48px 40px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .strategy-card:hover { background: rgba(201,169,110,0.04); }
+
+  .strategy-num {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(201,169,110,0.12);
+    line-height: 1;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .strategy-name {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .strategy-text {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--white-dim);
+  }
+
+  /* PROCESS */
+  .process-section {
+    padding: 130px 60px;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 80px;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent);
+  }
+
+  .process-step {
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .step-dot {
+    width: 64px;
+    height: 64px;
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--gold);
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+    background: var(--black);
+  }
+
+  .process-step:hover .step-dot {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+
+  .step-name {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .step-text {
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--white-dim);
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 160px 60px;
+    background: var(--off-black);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-bg-geo {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-family: var(--serif);
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    max-width: 700px;
+    margin: 0 auto 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-title em { font-style: italic; color: var(--gold-light); }
+
+  .cta-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--white-dim);
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 60px;
+    border-top: 1px solid rgba(201,169,110,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer-legal {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--gold-dim);
+    letter-spacing: 0.05em;
+    max-width: 500px;
+    line-height: 1.7;
+    text-align: right;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 48px;
+    animation: ticker 40s linear infinite;
+    width: max-content;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg class="nav-logo-mark" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="4" width="44" height="44" rx="1" transform="rotate(45 40 4)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <rect x="40" y="14" width="32" height="32" rx="1" transform="rotate(45 40 14)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <rect x="40" y="24" width="20" height="20" rx="1" transform="rotate(45 40 24)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <rect x="40" y="33" width="10" height="10" rx="1" transform="rotate(45 40 33)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">INDERSON</span>
+      <span class="nav-logo-sub">INVESTMENT GROUP</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#strategy">Strategy</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Investor Relations</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Forex · Futures · Alternative Assets</p>
+    <h1 class="hero-title">Capital<br>Allocated with<br><em>Precision.</em></h1>
+    <p class="hero-desc">
+      Inderson Investment Group deploys investor capital across global forex and futures markets — driven by rigorous quantitative research and disciplined risk management.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Explore Opportunities</a>
+      <a href="#strategy" class="btn-ghost">Our Approach</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-visual">
+      <svg class="hero-chart-svg" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M40,380 L80,340 L120,310 L160,290 L200,260 L240,230 L280,200 L320,190 L360,160 L400,140 L440,120 L480,100 L520,90 L560,80 L560,480 L40,480 Z" fill="url(#areaGrad)"/>
+        <path d="M40,380 L80,340 L120,310 L160,290 L200,260 L240,230 L280,200 L320,190 L360,160 L400,140 L440,120 L480,100 L520,90 L560,80" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linejoin="round"/>
+        <g opacity="0.7">
+          <line x1="60" y1="310" x2="60" y2="370" stroke="#8a7050" stroke-width="1"/>
+          <line x1="100" y1="280" x2="100" y2="350" stroke="#8a7050" stroke-width="1"/>
+          <line x1="140" y1="260" x2="140" y2="320" stroke="#8a7050" stroke-width="1"/>
+          <line x1="180" y1="230" x2="180" y2="295" stroke="#8a7050" stroke-width="1"/>
+          <line x1="220" y1="210" x2="220" y2="270" stroke="#8a7050" stroke-width="1"/>
+          <line x1="260" y1="180" x2="260" y2="245" stroke="#8a7050" stroke-width="1"/>
+          <line x1="300" y1="160" x2="300" y2="215" stroke="#8a7050" stroke-width="1"/>
+          <line x1="340" y1="140" x2="340" y2="195" stroke="#8a7050" stroke-width="1"/>
+          <line x1="380" y1="118" x2="380" y2="168" stroke="#8a7050" stroke-width="1"/>
+          <line x1="420" y1="96" x2="420" y2="148" stroke="#8a7050" stroke-width="1"/>
+          <line x1="460" y1="78" x2="460" y2="128" stroke="#8a7050" stroke-width="1"/>
+          <line x1="500" y1="62" x2="500" y2="108" stroke="#8a7050" stroke-width="1"/>
+          <rect x="52" y="330" width="16" height="30" rx="1" fill="#4a8c6a" opacity="0.8"/>
+          <rect x="92" y="295" width="16" height="35" rx="1" fill="#8c4a4a" opacity="0.8"/>
+          <rect x="132" y="278" width="16" height="28" rx="1" fill="#4a8c6a" opacity="0.8"/>
+          <rect x="172" y="248" width="16" height="30" rx="1" fill="#4a8c6a" opacity="0.8"/>
+          <rect x="212" y="224" width="16" height="26" rx="1" fill="#8c4a4a" opacity="0.8"/>
+          <rect x="252" y="196" width="16" height="28" rx="1" fill="#4a8c6a" opacity="0.8"/>
+          <rect x="292" y="172" width="16" height="24" rx="1" fill="#4a8c6a" opacity="0.8"/>
+          <rect x="332" y="150" width="16" height="26" rx="1" fill="#c9a96e" opacity="0.9"/>
+          <rect x="372" y="128" width="16" height="22" rx="1" fill="#4a8c6a" opacity="0.8"/>
+          <rect x="412" y="108" width="16" height="20" rx="1" fill="#4a8c6a" opacity="0.8"/>
+          <rect x="452" y="88" width="16" height="22" rx="1" fill="#c9a96e" opacity="0.9"/>
+          <rect x="492" y="70" width="16" height="20" rx="1" fill="#4a8c6a" opacity="0.8"/>
+        </g>
+        <text x="40" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">JAN</text>
+        <text x="180" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">APR</text>
+        <text x="340" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">JUL</text>
+        <text x="490" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">OCT</text>
+        <text x="490" y="72" fill="#c9a96e" font-family="Cormorant Garamond, serif" font-size="13" font-style="italic">+31.4%</text>
+        <line x1="40" y1="180" x2="560" y2="180" stroke="rgba(201,169,110,0.08)" stroke-width="1" stroke-dasharray="4,6"/>
+        <line x1="40" y1="280" x2="560" y2="280" stroke="rgba(201,169,110,0.08)" stroke-width="1" stroke-dasharray="4,6"/>
+        <line x1="40" y1="380" x2="560" y2="380" stroke="rgba(201,169,110,0.08)" stroke-width="1" stroke-dasharray="4,6"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-divider"></div>
+
+  <div class="ticker-bar" style="grid-column: 1/-1;">
+    <div class="ticker-inner">
+      <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-val">1.0842</span><span class="ticker-chg up">+0.18%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">GBP/USD</span><span class="ticker-val">1.2731</span><span class="ticker-chg up">+0.24%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-val">149.82</span><span class="ticker-chg dn">−0.31%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-val">2,388.40</span><span class="ticker-chg up">+0.52%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">CRUDE OIL</span><span class="ticker-val">79.14</span><span class="ticker-chg dn">−0.19%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">S&amp;P 500 FUT</span><span class="ticker-val">5,214.25</span><span class="ticker-chg up">+0.38%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">AUD/USD</span><span class="ticker-val">0.6548</span><span class="ticker-chg up">+0.11%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">USD/CHF</span><span class="ticker-val">0.9012</span><span class="ticker-chg dn">−0.08%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-val">1.0842</span><span class="ticker-chg up">+0.18%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">GBP/USD</span><span class="ticker-val">1.2731</span><span class="ticker-chg up">+0.24%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-val">149.82</span><span class="ticker-chg dn">−0.31%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-val">2,388.40</span><span class="ticker-chg up">+0.52%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">CRUDE OIL</span><span class="ticker-val">79.14</span><span class="ticker-chg dn">−0.19%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">S&amp;P 500 FUT</span><span class="ticker-val">5,214.25</span><span class="ticker-chg up">+0.38%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">AUD/USD</span><span class="ticker-val">0.6548</span><span class="ticker-chg up">+0.11%</span></div>
+      <div class="ticker-item"><span class="ticker-pair">USD/CHF</span><span class="ticker-val">0.9012</span><span class="ticker-chg dn">−0.08%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-cell reveal">
+      <div class="stat-num">$<span>340</span>M+</div>
+      <div class="stat-label">Capital Managed</div>
+    </div>
+    <div class="stat-cell reveal">
+      <div class="stat-num"><span>18</span>%</div>
+      <div class="stat-label">Avg. Annual Return</div>
+    </div>
+    <div class="stat-cell reveal">
+      <div class="stat-num"><span>12</span>+</div>
+      <div class="stat-label">Years in Operation</div>
+    </div>
+    <div class="stat-cell reveal">
+      <div class="stat-num"><span>0.82</span></div>
+      <div class="stat-label">Sharpe Ratio (3Y)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div>
+    <p class="section-tag reveal">About</p>
+    <h2 class="section-title reveal">Where discipline<br>meets <em>opportunity.</em></h2>
+    <p class="section-body reveal">
+      Founded on a belief that markets reward preparation over intuition, Inderson Investment Group has built a systematic approach to trading forex and futures markets across global time zones.
+    </p>
+    <p class="section-body reveal">
+      We combine proprietary algorithmic signals with seasoned discretionary oversight — ensuring our capital deployment is both data-driven and contextually aware of macro conditions.
+    </p>
+  </div>
+
+  <div class="about-geo reveal">
+    <div class="geo-card">
+      <div class="geo-market">Forex Markets</div>
+      <div class="geo-desc">Major, minor, and exotic currency pairs across London, New York, and Tokyo sessions. Specializing in momentum and mean-reversion strategies.</div>
+    </div>
+    <div class="geo-card">
+      <div class="geo-market">Futures Markets</div>
+      <div class="geo-desc">Commodity, index, and interest rate futures. Positioned to benefit from both trending and ranging macro environments.</div>
+    </div>
+    <div class="geo-card">
+      <div class="geo-market">Risk Management</div>
+      <div class="geo-desc">Every position is governed by strict drawdown limits, position sizing protocols, and portfolio-level correlation controls.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section class="strategy-section" id="strategy">
+  <div class="strategy-header">
+    <p class="section-tag reveal" style="justify-content: center;">Strategy</p>
+    <h2 class="section-title reveal" style="text-align: center;">Three pillars of<br><em>sustainable alpha.</em></h2>
+  </div>
+
+  <div class="strategy-grid">
+    <div class="strategy-card reveal">
+      <div class="strategy-num">01</div>
+      <h3 class="strategy-name">Systematic Research</h3>
+      <p class="strategy-text">Quantitative models screen thousands of market conditions daily, identifying high-probability setups with asymmetric risk-reward profiles across correlated instruments.</p>
+    </div>
+    <div class="strategy-card reveal">
+      <div class="strategy-num">02</div>
+      <h3 class="strategy-name">Macro Alignment</h3>
+      <p class="strategy-text">All positions are filtered through a top-down macro framework — ensuring our trade thesis is consistent with broader central bank policy, liquidity cycles, and geopolitical flows.</p>
+    </div>
+    <div class="strategy-card reveal">
+      <div class="strategy-num">03</div>
+      <h3 class="strategy-name">Dynamic Risk Control</h3>
+      <p class="strategy-text">Volatility-adjusted position sizing, real-time drawdown monitoring, and portfolio heat mapping ensure capital preservation remains the foundation of every allocation decision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+    <p class="section-tag reveal" style="justify-content: center;">Process</p>
+    <h2 class="section-title reveal" style="text-align: center;">How we <em>work.</em></h2>
+  </div>
+
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-dot">I</div>
+      <div class="step-name">Initial Meeting</div>
+      <p class="step-text">A confidential conversation to understand your investment objectives, time horizon, and risk appetite.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-dot">II</div>
+      <div class="step-name">Due Diligence</div>
+      <p class="step-text">We share our track record, strategy documentation, and risk disclosures in full transparency.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-dot">III</div>
+      <div class="step-name">Onboarding</div>
+      <p class="step-text">Structured legal agreements, managed account setup, and a dedicated relationship manager assigned.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-dot">IV</div>
+      <div class="step-name">Active Management</div>
+      <p class="step-text">Monthly reporting, quarterly reviews, and full account transparency through our investor portal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-bg-geo">
+    <svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="300" y="20" width="388" height="388" rx="2" transform="rotate(45 300 20)" fill="none" stroke="#c9a96e" stroke-width="1"/>
+      <rect x="300" y="80" width="300" height="300" rx="2" transform="rotate(45 300 80)" fill="none" stroke="#c9a96e" stroke-width="1"/>
+      <rect x="300" y="140" width="212" height="212" rx="2" transform="rotate(45 300 140)" fill="none" stroke="#c9a96e" stroke-width="1"/>
+      <rect x="300" y="200" width="130" height="130" rx="2" transform="rotate(45 300 200)" fill="none" stroke="#c9a96e" stroke-width="1"/>
+    </svg>
+  </div>
+  <p class="section-tag reveal" style="justify-content: center;">Investor Relations</p>
+  <h2 class="cta-title reveal">Begin a conversation<br>about your <em>capital.</em></h2>
+  <p class="cta-sub reveal">Qualified investors only. Minimum allocation thresholds apply.</p>
+  <div class="cta-actions reveal">
+    <a href="mailto:investors@indersongroup.com" class="btn-primary">Contact Our Team</a>
+    <a href="#about" class="btn-ghost">Learn More</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="4" width="44" height="44" rx="1" transform="rotate(45 40 4)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <rect x="40" y="14" width="32" height="32" rx="1" transform="rotate(45 40 14)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <rect x="40" y="24" width="20" height="20" rx="1" transform="rotate(45 40 24)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name" style="font-size:11px;">INDERSON</span>
+      <span class="nav-logo-sub" style="font-size:7px;">INVESTMENT GROUP</span>
+    </div>
+  </div>
+  <p class="footer-legal">
+    &copy; 2024 Inderson Investment Group. All rights reserved. Trading in forex and futures markets involves substantial risk of loss. Past performance is not indicative of future results. This page does not constitute an offer or solicitation to invest.
+  </p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
