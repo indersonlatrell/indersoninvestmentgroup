@@ -107,73 +107,37 @@ spacing:
   stack-lg: 32px
 ---
 
-## Brand & Style
-
-This design system is engineered for a high-end financial investment group, focusing on the concepts of **Precision, Authority, and Performance**. The brand personality is institutional and elite, designed to instill confidence in high-net-worth investors through a visual language of "quiet luxury."
-
-The aesthetic combines **Minimalism** with **Modern Corporate** influences. It utilizes a deep, monochromatic base to allow data and "alpha" accents (gold/amber) to command attention. The design prioritizes generous whitespace and a rigid underlying grid to evoke a sense of discipline and stability. Subtle glassmorphism is introduced for data overlays to provide a contemporary, multi-layered depth without compromising the seriousness of the financial context.
-
-## Colors
-
-The palette is anchored in **Deep Charcoal (#0A0A0A)** and **Surface Charcoal (#111111)** to create a sophisticated, high-contrast environment. 
-
-- **Primary (Precision Gold):** Used sparingly for key calls-to-action, active states, and emphasis in typography (italics/serif highlights).
-- **Secondary (Slate):** Used for borders, dividers, and secondary text to provide structure without the harshness of pure white.
-- **Data Visualization:** Performance metrics utilize a refined Emerald for gains and Crimson for risk, optimized for readability against the dark background.
-- **Glass Effects:** Overlays and cards should use semi-transparent variations of the Surface Charcoal with a slight blur to create depth tiers.
-
-## Typography
-
-The typographic strategy balances editorial elegance with functional clarity. 
-
-- **Headlines:** Use **EB Garamond**. Large headings should utilize italicized spans for keywords (e.g., "Precision", "Alpha") to mirror traditional financial journals.
-- **Body & Data:** Use **Inter**. This provides high legibility for dense financial tables, ticker tapes, and disclosure text.
-- **Numerical Data:** For primary metrics (e.g., AUM, Return %), use EB Garamond to emphasize the "prestige" of the results, while using Inter for tabular data to ensure alignment and readability.
-- **Letter Spacing:** Labels and sub-headers use wide tracking (0.1em) and uppercase styling to denote hierarchy and "About" sections.
-
-## Layout & Spacing
-
-The design system utilizes a **Fixed 12-Column Grid** for desktop, transitioning to a fluid single-column for mobile.
-
-- **Vertical Rhythm:** Sections are separated by significant padding (120px) to allow the content to breathe and feel exclusive.
-- **Grid Discipline:** Data cards and financial modules must align strictly to the 12-column grid. Components should span 3, 4, 6, or 12 columns to maintain symmetry.
-- **Data Density:** While the overall layout is airy, internal component spacing (like tables) remains compact and efficient to allow for professional data analysis.
-
-## Elevation & Depth
-
-Hierarchy is established through **Tonal Layering** and **Subtle Glassmorphism** rather than heavy shadows.
-
-- **Level 0 (Base):** #0A0A0A. Used for the primary background.
-- **Level 1 (Cards/Sections):** #111111. Slightly elevated surfaces for content grouping.
-- **Level 2 (Glass Overlays):** Surface Charcoal with 80% opacity and 12px backdrop-blur. Used for floating navigation bars or contextual modals.
-- **Borders:** Instead of shadows, use 1px solid borders (#D4D0C8 at 10% opacity) to define boundaries. This creates a "technical" and precise feel suitable for finance.
-
-## Shapes
-
-The design system employs a **Sharp (0px)** corner radius for almost all institutional elements. This lack of rounding communicates stability, clinical precision, and a "no-nonsense" approach to asset management.
-
-- **Buttons:** Hard 90-degree corners.
-- **Input Fields:** Bottom-border only or hard-edged containers.
-- **Charts:** Technical indicators and candlestick charts should utilize sharp geometry without smoothing to maintain the integrity of the data points.
-
-## Components
-
-### Buttons
-- **Primary:** Solid Precision Gold background with Black text. Sharp corners.
-- **Secondary:** Ghost style with Precision Gold border and text. 
-- **Tertiary:** Text-only with a trailing 24px horizontal rule, mimicking the "Our Approach" style in the reference.
-
-### Financial Tables
-- **Header:** Uppercase Inter, Slate Gray, 12px, 1px bottom border.
-- **Rows:** Alternating subtle zebra striping or simple dividers. 
-- **Metrics:** Use green/red indicators only for "Change" or "P/L" columns; keep all other data monochromatic.
-
-### Data Cards
-- Background: Surface Charcoal (#111111).
-- Border: 1px Slate Gray (#D4D0C8) at 10% opacity.
-- Header: EB Garamond for the title, Inter for the value.
-
-### Navigation
-- Top-mounted, fixed. 
-- Utilizes the Level 2 Glassmorphism (blur) to stay legible as the user scrolls through dark and textured sections.
-- High-contrast gold hover states for menu items.
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 208, 200, 0.1);
+        }
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: rgba(14, 14, 14, 0.5);
+            border-top: 1px solid rgba(212, 208, 200, 0.1);
+            border-bottom: 1px solid rgba(212, 208, 200, 0.1);
+        }
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .alpha-text {
+            color: #C9A96E;
+            font-style: italic;
+        }
+    
