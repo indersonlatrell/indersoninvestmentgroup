@@ -1,0 +1,179 @@
+---
+name: Prestige Alpha Institutional
+colors:
+  surface: '#131313'
+  surface-dim: '#131313'
+  surface-bright: '#3a3939'
+  surface-container-lowest: '#0e0e0e'
+  surface-container-low: '#1c1b1b'
+  surface-container: '#201f1f'
+  surface-container-high: '#2a2a2a'
+  surface-container-highest: '#353534'
+  on-surface: '#e5e2e1'
+  on-surface-variant: '#d0c5b5'
+  inverse-surface: '#e5e2e1'
+  inverse-on-surface: '#313030'
+  outline: '#998f81'
+  outline-variant: '#4d463a'
+  surface-tint: '#e4c285'
+  primary: '#e6c487'
+  on-primary: '#412d00'
+  primary-container: '#c9a96e'
+  on-primary-container: '#543d0c'
+  inverse-primary: '#745a27'
+  secondary: '#c5c6cc'
+  on-secondary: '#2e3135'
+  secondary-container: '#46494e'
+  on-secondary-container: '#b6b8be'
+  tertiary: '#cac8c5'
+  on-tertiary: '#30312e'
+  tertiary-container: '#aeadaa'
+  on-tertiary-container: '#41413e'
+  error: '#ffb4ab'
+  on-error: '#690005'
+  error-container: '#93000a'
+  on-error-container: '#ffdad6'
+  primary-fixed: '#ffdea4'
+  primary-fixed-dim: '#e4c285'
+  on-primary-fixed: '#261900'
+  on-primary-fixed-variant: '#5a4312'
+  secondary-fixed: '#e1e2e8'
+  secondary-fixed-dim: '#c5c6cc'
+  on-secondary-fixed: '#191c20'
+  on-secondary-fixed-variant: '#44474b'
+  tertiary-fixed: '#e4e2de'
+  tertiary-fixed-dim: '#c8c6c3'
+  on-tertiary-fixed: '#1b1c1a'
+  on-tertiary-fixed-variant: '#474744'
+  background: '#131313'
+  on-background: '#e5e2e1'
+  surface-variant: '#353534'
+  precision-gold: '#C9A96E'
+  alpha-amber: '#E2B15B'
+  surface-charcoal: '#111111'
+  slate-gray: '#D4D0C8'
+  success-emerald: '#2E7D32'
+  risk-crimson: '#D32F2F'
+typography:
+  display-lg:
+    fontFamily: EB Garamond
+    fontSize: 72px
+    fontWeight: '400'
+    lineHeight: '1.1'
+    letterSpacing: -0.02em
+  headline-lg:
+    fontFamily: EB Garamond
+    fontSize: 48px
+    fontWeight: '400'
+    lineHeight: '1.2'
+  headline-lg-mobile:
+    fontFamily: EB Garamond
+    fontSize: 32px
+    fontWeight: '400'
+    lineHeight: '1.2'
+  headline-md:
+    fontFamily: EB Garamond
+    fontSize: 32px
+    fontWeight: '400'
+    lineHeight: '1.3'
+  body-lg:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: '400'
+    lineHeight: '1.6'
+  body-md:
+    fontFamily: Inter
+    fontSize: 16px
+    fontWeight: '400'
+    lineHeight: '1.6'
+  label-md:
+    fontFamily: Inter
+    fontSize: 12px
+    fontWeight: '600'
+    lineHeight: '1'
+    letterSpacing: 0.1em
+  stat-lg:
+    fontFamily: EB Garamond
+    fontSize: 40px
+    fontWeight: '400'
+    lineHeight: '1'
+spacing:
+  container-max: 1280px
+  gutter: 32px
+  margin-mobile: 20px
+  section-padding: 120px
+  stack-sm: 8px
+  stack-md: 16px
+  stack-lg: 32px
+---
+
+## Brand & Style
+
+This design system is engineered for a high-end financial investment group, focusing on the concepts of **Precision, Authority, and Performance**. The brand personality is institutional and elite, designed to instill confidence in high-net-worth investors through a visual language of "quiet luxury."
+
+The aesthetic combines **Minimalism** with **Modern Corporate** influences. It utilizes a deep, monochromatic base to allow data and "alpha" accents (gold/amber) to command attention. The design prioritizes generous whitespace and a rigid underlying grid to evoke a sense of discipline and stability. Subtle glassmorphism is introduced for data overlays to provide a contemporary, multi-layered depth without compromising the seriousness of the financial context.
+
+## Colors
+
+The palette is anchored in **Deep Charcoal (#0A0A0A)** and **Surface Charcoal (#111111)** to create a sophisticated, high-contrast environment. 
+
+- **Primary (Precision Gold):** Used sparingly for key calls-to-action, active states, and emphasis in typography (italics/serif highlights).
+- **Secondary (Slate):** Used for borders, dividers, and secondary text to provide structure without the harshness of pure white.
+- **Data Visualization:** Performance metrics utilize a refined Emerald for gains and Crimson for risk, optimized for readability against the dark background.
+- **Glass Effects:** Overlays and cards should use semi-transparent variations of the Surface Charcoal with a slight blur to create depth tiers.
+
+## Typography
+
+The typographic strategy balances editorial elegance with functional clarity. 
+
+- **Headlines:** Use **EB Garamond**. Large headings should utilize italicized spans for keywords (e.g., "Precision", "Alpha") to mirror traditional financial journals.
+- **Body & Data:** Use **Inter**. This provides high legibility for dense financial tables, ticker tapes, and disclosure text.
+- **Numerical Data:** For primary metrics (e.g., AUM, Return %), use EB Garamond to emphasize the "prestige" of the results, while using Inter for tabular data to ensure alignment and readability.
+- **Letter Spacing:** Labels and sub-headers use wide tracking (0.1em) and uppercase styling to denote hierarchy and "About" sections.
+
+## Layout & Spacing
+
+The design system utilizes a **Fixed 12-Column Grid** for desktop, transitioning to a fluid single-column for mobile.
+
+- **Vertical Rhythm:** Sections are separated by significant padding (120px) to allow the content to breathe and feel exclusive.
+- **Grid Discipline:** Data cards and financial modules must align strictly to the 12-column grid. Components should span 3, 4, 6, or 12 columns to maintain symmetry.
+- **Data Density:** While the overall layout is airy, internal component spacing (like tables) remains compact and efficient to allow for professional data analysis.
+
+## Elevation & Depth
+
+Hierarchy is established through **Tonal Layering** and **Subtle Glassmorphism** rather than heavy shadows.
+
+- **Level 0 (Base):** #0A0A0A. Used for the primary background.
+- **Level 1 (Cards/Sections):** #111111. Slightly elevated surfaces for content grouping.
+- **Level 2 (Glass Overlays):** Surface Charcoal with 80% opacity and 12px backdrop-blur. Used for floating navigation bars or contextual modals.
+- **Borders:** Instead of shadows, use 1px solid borders (#D4D0C8 at 10% opacity) to define boundaries. This creates a "technical" and precise feel suitable for finance.
+
+## Shapes
+
+The design system employs a **Sharp (0px)** corner radius for almost all institutional elements. This lack of rounding communicates stability, clinical precision, and a "no-nonsense" approach to asset management.
+
+- **Buttons:** Hard 90-degree corners.
+- **Input Fields:** Bottom-border only or hard-edged containers.
+- **Charts:** Technical indicators and candlestick charts should utilize sharp geometry without smoothing to maintain the integrity of the data points.
+
+## Components
+
+### Buttons
+- **Primary:** Solid Precision Gold background with Black text. Sharp corners.
+- **Secondary:** Ghost style with Precision Gold border and text. 
+- **Tertiary:** Text-only with a trailing 24px horizontal rule, mimicking the "Our Approach" style in the reference.
+
+### Financial Tables
+- **Header:** Uppercase Inter, Slate Gray, 12px, 1px bottom border.
+- **Rows:** Alternating subtle zebra striping or simple dividers. 
+- **Metrics:** Use green/red indicators only for "Change" or "P/L" columns; keep all other data monochromatic.
+
+### Data Cards
+- Background: Surface Charcoal (#111111).
+- Border: 1px Slate Gray (#D4D0C8) at 10% opacity.
+- Header: EB Garamond for the title, Inter for the value.
+
+### Navigation
+- Top-mounted, fixed. 
+- Utilizes the Level 2 Glassmorphism (blur) to stay legible as the user scrolls through dark and textured sections.
+- High-contrast gold hover states for menu items.
