@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inderson Investment Group | Precision Capital Allocation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-charcoal": "#111111",
+            "precision-gold": "#C9A96E",
+            "on-surface": "#e5e2e1",
+            "on-surface-variant": "#d0c5b5",
+            "surface-container-lowest": "#0e0e0e",
+            "slate-gray": "#D4D0C8",
+            "success-emerald": "#2E7D32",
+            "risk-crimson": "#D32F2F",
+            "background": "#131313"
+          },
+          spacing: {
+            "container-max": "1280px",
+            "stack-md": "16px",
+            "margin-mobile": "20px",
+            "gutter": "32px",
+            "stack-lg": "32px",
+            "stack-sm": "8px",
+            "section-padding": "120px"
+          },
+          fontFamily: {
+            "label-md": ["Inter", "sans-serif"],
+            "stat-lg": ["EB Garamond", "serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "headline-lg-mobile": ["EB Garamond", "serif"],
+            "display-lg": ["EB Garamond", "serif"],
+            "headline-md": ["EB Garamond", "serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-lg": ["EB Garamond", "serif"]
+          },
+          fontSize: {
+            "label-md": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }],
+            "stat-lg": ["40px", { lineHeight: "1", fontWeight: "400" }],
+            "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+            "display-lg": ["72px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "400" }],
+            "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "400" }],
+            "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            "headline-lg": ["48px", { lineHeight: "1.2", fontWeight: "400" }]
+          }
+        }
+      }
+  };
+</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="./index.css?v=8"/>
+</head>
+<body class="font-body-md bg-background selection:bg-precision-gold selection:text-surface-charcoal">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-charcoal/80 backdrop-blur-xl border-b border-slate-gray/10">
+<div class="max-w-container-max mx-auto px-gutter py-6 flex justify-between items-center">
+<div class="text-headline-md font-headline-md font-bold text-on-surface uppercase tracking-wider">
+                Inderson <span class="text-precision-gold">Investment</span> Group
+            </div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-label-md font-label-md text-precision-gold font-bold border-b border-precision-gold pb-1 transition-colors duration-300" href="#about">About</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-precision-gold transition-colors duration-300" href="#strategy">Strategy</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-precision-gold transition-colors duration-300" href="#track-record">Process</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-precision-gold transition-colors duration-300" href="#contact">Contact</a>
+</div>
+<a href="./login.html" class="investor-button px-6 py-2 bg-precision-gold text-surface-charcoal font-bold text-label-md transition-transform active:scale-95">Investor Relations</a>
+</div>
+</nav>
+<!-- Hero Section -->
+<section id="home" class="hero-section relative min-h-screen flex items-center pt-32 overflow-hidden">
+<div class="absolute inset-0 z-0">
+
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-gutter grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-stack-lg">
+<div class="flex items-center gap-4 text-precision-gold">
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+<p class="font-label-md text-label-md uppercase tracking-[0.2em]">Forex · Futures · Alternative Assets</p>
+</div>
+<h1 class="font-display-lg text-display-lg leading-tight">
+                    Capital<br/>Allocated with<br/><span class="alpha-text">Precision.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Inderson Investment Group deploys investor capital across global forex and futures markets — driven by rigorous quantitative research and disciplined risk management.
+                </p>
+<div class="flex items-center gap-8 pt-4">
+<button class="px-8 py-4 bg-precision-gold text-surface-charcoal font-bold text-label-md hover:brightness-110 transition-all">
+                        EXPLORE OPPORTUNITIES
+                    </button>
+<button class="flex items-center gap-4 text-on-surface hover:text-precision-gold transition-colors group">
+<span class="text-label-md font-label-md uppercase tracking-widest">Our Approach</span>
+<span class="w-16 h-[1px] bg-on-surface-variant group-hover:bg-precision-gold transition-all duration-500"></span>
+</button>
+</div>
+</div>
+<div class="relative hidden lg:block">
+<div class="hero-chart glass-panel p-8 aspect-[4/3] flex items-end">
+<div class="absolute top-0 right-0 p-8">
+<div class="flex items-center gap-2 text-success-emerald">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-headline-md text-headline-md">+31.4%</span>
+</div>
+<p class="text-label-md text-on-surface-variant text-right">Annual Alpha</p>
+</div>
+<div class="w-full h-full flex items-end gap-1 overflow-hidden">
+<!-- Chart Mockup -->
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[20%]" style="height: 30%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[25%]" style="height: 45%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[40%]" style="height: 35%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[55%]" style="height: 60%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[45%]" style="height: 50%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[70%]" style="height: 85%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[65%]" style="height: 70%"></div>
+<div class="flex-1 bg-precision-gold/20 border-t border-precision-gold h-[100%]" style="height: 95%"></div>
+</div>
+</div>
+<div class="absolute -bottom-8 -left-8 glass-panel p-6 w-64">
+<div class="flex justify-between items-center mb-4">
+<span class="text-label-md text-on-surface-variant">Live Terminal</span>
+<span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse"></span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-slate-gray">EUR/USD</span>
+<span class="text-success-emerald">1.0842</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-slate-gray">XAU/USD</span>
+<span class="text-success-emerald">2,388.40</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-slate-gray">SPX 500</span>
+<span class="text-success-emerald">5,214.25</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ticker Section -->
+<div class="ticker-wrap py-4">
+<div class="ticker">
+<div class="flex gap-12 px-12 items-center">
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/JPY <span class="text-risk-crimson">149.82 -0.31%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">GOLD <span class="text-success-emerald">2,388.40 +0.52%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">CRUDE OIL <span class="text-risk-crimson">79.14 -0.19%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">S&amp;P 500 FUT <span class="text-success-emerald">5,214.25 +0.38%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">AUD/USD <span class="text-success-emerald">0.6548 +0.11%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/CHF <span class="text-risk-crimson">0.9012 -0.08%</span></span>
+</div>
+<!-- Duplicated for seamless loop -->
+<div class="flex gap-12 px-12 items-center">
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/JPY <span class="text-risk-crimson">149.82 -0.31%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">GOLD <span class="text-success-emerald">2,388.40 +0.52%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">CRUDE OIL <span class="text-risk-crimson">79.14 -0.19%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">S&amp;P 500 FUT <span class="text-success-emerald">5,214.25 +0.38%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">AUD/USD <span class="text-success-emerald">0.6548 +0.11%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/CHF <span class="text-risk-crimson">0.9012 -0.08%</span></span>
+</div>
+</div>
+</div>
+<!-- Stats Section -->
+<section class="py-24 border-b border-slate-gray/10">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">$25K+</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Capital AUM</p>
+</div>
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">18%</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Avg. Annual Return</p>
+</div>
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">3+</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Years in Operation</p>
+</div>
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">0.82</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Sharpe Ratio (3Y)</p>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section id="about" class="about-section py-section-padding">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid lg:grid-cols-2 gap-24">
+<div class="space-y-stack-lg">
+<div class="flex items-center gap-4 text-precision-gold">
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+<p class="font-label-md text-label-md uppercase tracking-widest">About</p>
+</div>
+<h2 class="font-headline-lg text-headline-lg">Where discipline meets <span class="alpha-text">opportunity.</span></h2>
+<div class="space-y-6 text-on-surface-variant">
+<p class="font-body-lg text-body-lg">Founded on a belief that markets reward preparation over intuition, Inderson Investment Group has built a systematic approach to trading forex and futures markets across global time zones.</p>
+<p class="font-body-lg text-body-lg">We combine proprietary algorithmic signals with seasoned discretionary oversight — ensuring our capital deployment is both data-driven and contextually aware of macro conditions.</p>
+</div>
+</div>
+<div class="grid gap-6">
+<div class="glass-panel p-8 group hover:bg-surface-charcoal transition-all duration-500">
+<h4 class="font-headline-md text-headline-md mb-4 flex items-center justify-between">
+                            Forex Markets
+                            <span class="material-symbols-outlined text-precision-gold opacity-0 group-hover:opacity-100 transition-opacity">currency_exchange</span>
+</h4>
+<p class="text-on-surface-variant font-body-md">Major, minor, and exotic currency pairs across London, New York, and Tokyo sessions. Specializing in momentum and mean-reversion strategies.</p>
+</div>
+<div class="glass-panel p-8 group hover:bg-surface-charcoal transition-all duration-500">
+<h4 class="font-headline-md text-headline-md mb-4 flex items-center justify-between">
+                            Futures Markets
+                            <span class="material-symbols-outlined text-precision-gold opacity-0 group-hover:opacity-100 transition-opacity">timeline</span>
+</h4>
+<p class="text-on-surface-variant font-body-md">Commodity, index, and interest rate futures. Positioned to benefit from both trending and ranging macro environments.</p>
+</div>
+<div class="glass-panel p-8 group hover:bg-surface-charcoal transition-all duration-500">
+<h4 class="font-headline-md text-headline-md mb-4 flex items-center justify-between">
+                            Risk Management
+                            <span class="material-symbols-outlined text-precision-gold opacity-0 group-hover:opacity-100 transition-opacity">shield</span>
+</h4>
+<p class="text-on-surface-variant font-body-md">Every position is governed by strict drawdown limits, position sizing protocols, and portfolio-level correlation controls.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Strategy Section (Pillars) -->
+<section id="strategy" class="strategy-section py-section-padding bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center space-y-stack-md mb-24">
+<p class="font-label-md text-label-md text-precision-gold uppercase tracking-[0.3em]">Strategy</p>
+<h2 class="font-headline-lg text-headline-lg">Three pillars of <span class="alpha-text">sustainable alpha.</span></h2>
+</div>
+<div class="grid md:grid-cols-3 gap-1px bg-slate-gray/10">
+<div class="bg-surface-charcoal p-12 space-y-8">
+<p class="font-display-lg text-stat-lg text-slate-gray/20">01</p>
+<h3 class="font-headline-md text-headline-md text-precision-gold">Systematic Research</h3>
+<p class="text-on-surface-variant leading-relaxed">Quantitative models screen thousands of market conditions daily, identifying high-probability setups with asymmetric risk-reward profiles across correlated instruments.</p>
+</div>
+<div class="bg-surface-charcoal p-12 space-y-8">
+<p class="font-display-lg text-stat-lg text-slate-gray/20">02</p>
+<h3 class="font-headline-md text-headline-md text-precision-gold">Macro Alignment</h3>
+<p class="text-on-surface-variant leading-relaxed">All positions are filtered through a top-down macro framework — ensuring our trade thesis is consistent with broader central bank policy, liquidity cycles, and geopolitical flows.</p>
+</div>
+<div class="bg-surface-charcoal p-12 space-y-8">
+<p class="font-display-lg text-stat-lg text-slate-gray/20">03</p>
+<h3 class="font-headline-md text-headline-md text-precision-gold">Dynamic Risk Control</h3>
+<p class="text-on-surface-variant leading-relaxed">Volatility-adjusted position sizing, real-time drawdown monitoring, and portfolio heat mapping ensure capital preservation remains the foundation of every allocation decision.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Track Record Section -->
+<section id="track-record" class="track-section py-section-padding">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex flex-col md:flex-row justify-between items-end gap-12 mb-24">
+<div class="space-y-stack-md">
+<p class="font-label-md text-label-md text-precision-gold uppercase tracking-widest">Track Record</p>
+<h2 class="font-headline-lg text-headline-lg">Performance built on<br/><span class="alpha-text">verified discipline.</span></h2>
+</div>
+<div class="flex gap-4 p-1 glass-panel">
+<button class="px-4 py-2 text-label-md bg-precision-gold text-surface-charcoal font-bold">ALL TIME</button>
+<button class="px-4 py-2 text-label-md text-on-surface-variant hover:text-on-surface transition-colors">6 MONTHS</button>
+<button class="px-4 py-2 text-label-md text-on-surface-variant hover:text-on-surface transition-colors">1 MONTH</button>
+</div>
+</div>
+<div class="grid lg:grid-cols-4 gap-8 mb-24">
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Total Return (YTD)</p>
+<p class="font-stat-lg text-stat-lg text-success-emerald">+31.4%</p>
+</div>
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Win Rate</p>
+<p class="font-stat-lg text-stat-lg text-on-surface">68%</p>
+</div>
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Avg Risk:Reward</p>
+<p class="font-stat-lg text-stat-lg text-on-surface">1:2.4</p>
+</div>
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Max Drawdown</p>
+<p class="font-stat-lg text-stat-lg text-risk-crimson">-6.2%</p>
+</div>
+</div>
+<div class="glass-panel p-1 border-slate-gray/10 mb-24">
+<div class="p-8 border-b border-slate-gray/10 flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md">Equity Curve Analysis</h4>
+<p class="text-label-md text-on-surface-variant">Portfolio grew from 100% to 131.4%</p>
+</div>
+<div class="h-96 w-full relative p-12">
+
+<!-- Chart Lines -->
+<div class="absolute inset-0 p-12 flex items-end">
+<svg class="w-full h-full stroke-precision-gold fill-none" viewbox="0 0 1000 400">
+<path d="M0 350 Q 100 340 200 320 T 400 280 T 600 200 T 800 150 T 1000 50" stroke-width="3"></path>
+<path d="M0 350 Q 100 340 200 320 T 400 280 T 600 200 T 800 150 T 1000 50 L 1000 400 L 0 400 Z" fill="url(#grad1)" opacity="0.1"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color: #C9A96E; stop-opacity: 1"></stop>
+<stop offset="100%" style="stop-color: #C9A96E; stop-opacity: 0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+<!-- Trade History Table -->
+<div class="overflow-x-auto glass-panel">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-slate-gray/10">
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Date</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Pair</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Dir</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Entry</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Exit</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">P&amp;L (R)</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Strategy</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-gray/5">
+<tr class="hover:bg-surface-charcoal/50 transition-colors">
+<td class="px-8 py-6 text-on-surface">2024-10-28</td>
+<td class="px-8 py-6 font-bold text-precision-gold">GBP/USD</td>
+<td class="px-8 py-6"><span class="text-risk-crimson">SHORT</span></td>
+<td class="px-8 py-6">1.2580</td>
+<td class="px-8 py-6">1.3041</td>
+<td class="px-8 py-6 text-success-emerald">+2.1R</td>
+<td class="px-8 py-6 italic text-on-surface-variant">Trend Continuation</td>
+</tr>
+<tr class="hover:bg-surface-charcoal/50 transition-colors">
+<td class="px-8 py-6 text-on-surface">2024-10-24</td>
+<td class="px-8 py-6 font-bold text-precision-gold">EUR/USD</td>
+<td class="px-8 py-6"><span class="text-risk-crimson">SHORT</span></td>
+<td class="px-8 py-6">1.0892</td>
+<td class="px-8 py-6">1.0861</td>
+<td class="px-8 py-6 text-success-emerald">+1.6R</td>
+<td class="px-8 py-6 italic text-on-surface-variant">Mean Reversion</td>
+</tr>
+<tr class="hover:bg-surface-charcoal/50 transition-colors">
+<td class="px-8 py-6 text-on-surface">2024-10-21</td>
+<td class="px-8 py-6 font-bold text-precision-gold">USD/JPY</td>
+<td class="px-8 py-6"><span class="text-success-emerald">LONG</span></td>
+<td class="px-8 py-6">149.40</td>
+<td class="px-8 py-6">149.12</td>
+<td class="px-8 py-6 text-risk-crimson">-1.0R</td>
+<td class="px-8 py-6 italic text-on-surface-variant">Breakout</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section id="contact" class="contact-section py-section-padding relative overflow-hidden">
+<div class="absolute inset-0 z-0">
+
+</div>
+<div class="relative z-10 max-w-4xl mx-auto text-center px-gutter space-y-stack-lg">
+<div class="flex items-center justify-center gap-4 text-precision-gold">
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+<p class="font-label-md text-label-md uppercase tracking-[0.4em]">Investor Relations</p>
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+</div>
+<h2 class="font-headline-lg text-headline-lg">Begin a conversation<br/>about your <span class="alpha-text">capital.</span></h2>
+<p class="text-on-surface-variant font-body-lg">Qualified investors only. Minimum allocation thresholds apply. Direct access to portfolio managers and institutional transparency.</p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-8 pt-8">
+<button class="w-full md:w-auto px-12 py-5 bg-precision-gold text-surface-charcoal font-bold text-label-md hover:scale-105 transition-transform">
+                    CONTACT OUR TEAM
+                </button>
+<button class="flex items-center gap-4 text-on-surface hover:text-precision-gold transition-colors group">
+<span class="text-label-md font-label-md uppercase tracking-widest">Learn More</span>
+<span class="w-24 h-[1px] bg-slate-gray/30 group-hover:bg-precision-gold transition-all duration-700"></span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-slate-gray/10">
+<div class="max-w-container-max mx-auto px-gutter py-section-padding flex flex-col md:flex-row justify-between items-start gap-stack-md">
+<div class="max-w-md space-y-8">
+<div class="text-body-lg font-headline-md text-on-surface uppercase font-bold tracking-wider">
+                    Inderson <span class="text-precision-gold">Investment</span> Group
+                </div>
+<p class="text-body-md font-body-md text-on-surface-variant opacity-80 leading-loose">
+                    © 2024 Inderson Investment Group. All rights reserved. Trading in forex and futures markets involves substantial risk of loss. Past performance is not indicative of future results. This page does not constitute an offer or solicitation to invest.
+                </p>
+</div>
+<div class="flex flex-col md:items-end gap-12">
+<div class="flex gap-8">
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-precision-gold transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-precision-gold transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-precision-gold transition-colors duration-200" href="#">Risk Disclosure</a>
+</div>
+<div class="text-on-surface-variant flex items-center gap-4">
+<span class="material-symbols-outlined text-precision-gold">language</span>
+<span class="text-label-md uppercase tracking-widest">Global Markets HQ</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple intersection observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

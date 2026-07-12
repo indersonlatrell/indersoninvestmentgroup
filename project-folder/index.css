@@ -1,0 +1,217 @@
+:root {
+  --surface: #131313;
+  --surface-lowest: #0e0e0e;
+  --surface-charcoal: #111111;
+  --surface-card: #171717;
+  --surface-card-hover: #1b1a19;
+  --text: #e5e2e1;
+  --muted: #b8b0a5;
+  --gold: #c9a96e;
+  --gold-bright: #e6c487;
+  --line: rgba(212, 208, 200, 0.11);
+  --success: #4d9a59;
+  --danger: #dc5b58;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 68% 12%, rgba(201, 169, 110, 0.045), transparent 28%),
+    #0a0a0a;
+  color: var(--text);
+  overflow-x: hidden;
+  font-family: Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--gold); color: #111; }
+
+/* Keep the desktop composition close to the supplied draft. */
+.max-w-container-max { max-width: 1180px !important; }
+.px-gutter { padding-left: 28px !important; padding-right: 28px !important; }
+.py-section-padding { padding-top: 105px !important; padding-bottom: 105px !important; }
+
+nav {
+  background: rgba(10, 10, 10, 0.86) !important;
+  border-bottom-color: var(--line) !important;
+}
+nav > div { min-height: 78px; padding-top: 0 !important; padding-bottom: 0 !important; }
+nav .text-headline-md {
+  font-family: "EB Garamond", serif !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  letter-spacing: .055em !important;
+  white-space: nowrap;
+}
+nav a { text-decoration: none; }
+nav .hidden.md\:flex { gap: 30px !important; }
+nav .text-label-md { font-size: 10px !important; letter-spacing: .12em !important; }
+.investor-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 17px !important;
+  border: 1px solid var(--gold);
+  background: var(--gold) !important;
+  font-size: 9px !important;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.hero-section {
+  min-height: 760px !important;
+  padding-top: 112px !important;
+  padding-bottom: 72px;
+  border-bottom: 1px solid rgba(212, 208, 200, .06);
+}
+.hero-section > .absolute {
+  background:
+    linear-gradient(90deg, rgba(10,10,10,.98) 0%, rgba(10,10,10,.78) 45%, rgba(10,10,10,.88) 100%),
+    radial-gradient(circle at 72% 45%, rgba(201,169,110,.07), transparent 34%);
+}
+.hero-section .grid { gap: 84px !important; }
+.hero-section h1 {
+  font-family: "EB Garamond", serif;
+  font-size: clamp(58px, 5.7vw, 78px) !important;
+  line-height: .96 !important;
+  letter-spacing: -.035em !important;
+  max-width: 580px;
+}
+.hero-section h1 .alpha-text { display: inline-block; margin-top: 7px; }
+.hero-section p.text-body-lg {
+  max-width: 600px !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  color: #bcb4a8 !important;
+}
+.hero-section .space-y-stack-lg > :not([hidden]) ~ :not([hidden]) { margin-top: 25px !important; }
+.hero-section button { border-radius: 0 !important; }
+.hero-section .px-8.py-4 {
+  min-height: 44px;
+  padding: 0 25px !important;
+  font-size: 9px !important;
+  letter-spacing: .12em;
+}
+.alpha-text { color: var(--gold); font-style: italic; font-weight: 400; }
+
+.glass-panel {
+  background: rgba(17, 17, 17, .82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px rgba(255,255,255,.012);
+}
+.hero-section .glass-panel.aspect-\[4\/3\] {
+  min-height: 350px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.018), transparent 40%),
+    #111;
+}
+.hero-section .glass-panel.aspect-\[4\/3\]::before {
+  content: "";
+  position: absolute;
+  inset: 28px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 100% 25%, 20% 100%;
+  opacity: .35;
+}
+
+.ticker-wrap {
+  width: 100%; overflow: hidden;
+  background: rgba(14, 14, 14, .9);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.ticker { display: flex; width: max-content; white-space: nowrap; animation: ticker 34s linear infinite; }
+.ticker:hover { animation-play-state: paused; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+/* Statistics */
+section.py-24 { padding-top: 62px !important; padding-bottom: 62px !important; }
+section.py-24 .text-stat-lg { font-size: 31px !important; }
+section.py-24 .pl-8 { padding-left: 22px !important; }
+section.py-24 .text-label-md { font-size: 8px !important; letter-spacing: .14em !important; }
+
+/* About */
+.about-section .grid.lg\:grid-cols-2 { gap: 95px !important; }
+.about-section h2, .strategy-section h2, .track-section h2, .contact-section h2 {
+  font-family: "EB Garamond", serif;
+  font-size: clamp(40px, 4vw, 54px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.025em;
+}
+.about-section .text-body-lg { font-size: 15px !important; line-height: 1.72 !important; }
+.about-section .grid.gap-6 { gap: 14px !important; }
+.about-section .glass-panel { padding: 25px !important; }
+.about-section .glass-panel h4 { font-size: 23px !important; margin-bottom: 8px !important; }
+.about-section .glass-panel p { font-size: 13px !important; line-height: 1.6; }
+.about-section .glass-panel:hover { border-color: rgba(201,169,110,.35); transform: translateX(4px); }
+
+/* Strategy */
+.strategy-section { background: #080808 !important; }
+.strategy-section .mb-24 { margin-bottom: 62px !important; }
+.strategy-section .grid { gap: 1px !important; }
+.strategy-section .bg-surface-charcoal { padding: 38px !important; min-height: 310px; }
+.strategy-section h3 { font-size: 25px !important; }
+.strategy-section p.leading-relaxed { font-size: 13px; line-height: 1.7; color: #aaa297; }
+.strategy-section .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 19px !important; }
+
+/* Track record */
+.track-section .mb-24 { margin-bottom: 58px !important; }
+.track-section .grid.lg\:grid-cols-4 { gap: 13px !important; }
+.track-section .grid.lg\:grid-cols-4 .glass-panel { padding: 27px 18px !important; }
+.track-section .h-96 { height: 320px !important; }
+.track-section table { min-width: 900px; }
+.track-section th { font-size: 9px !important; letter-spacing: .13em; }
+.track-section td { font-size: 13px; }
+.track-section th, .track-section td { padding-left: 24px !important; padding-right: 24px !important; }
+
+.contact-section {
+  border-top: 1px solid rgba(212,208,200,.06);
+  background: radial-gradient(circle at center, rgba(201,169,110,.055), transparent 42%);
+}
+.contact-section > .absolute { background: linear-gradient(180deg, transparent, rgba(0,0,0,.18)); }
+.contact-section p.text-on-surface-variant { max-width: 680px; margin-left: auto; margin-right: auto; }
+
+footer { background: #080808 !important; }
+footer .py-section-padding { padding-top: 70px !important; padding-bottom: 70px !important; }
+footer .text-body-lg { font-size: 18px !important; }
+footer p { font-size: 12px !important; }
+
+@media (max-width: 1023px) {
+  .hero-section { min-height: auto !important; padding-top: 145px !important; padding-bottom: 95px; }
+  .hero-section .grid { gap: 45px !important; }
+  .about-section .grid.lg\:grid-cols-2 { gap: 60px !important; }
+}
+
+@media (max-width: 767px) {
+  .px-gutter { padding-left: 20px !important; padding-right: 20px !important; }
+  .py-section-padding { padding-top: 76px !important; padding-bottom: 76px !important; }
+  nav > div { min-height: 68px; }
+  nav .text-headline-md { font-size: 15px !important; max-width: 190px; white-space: normal; line-height: 1.15 !important; }
+  .investor-button { padding: 0 11px !important; font-size: 8px !important; }
+  .hero-section { padding-top: 118px !important; padding-bottom: 74px; }
+  .hero-section h1 { font-size: 51px !important; line-height: 1 !important; }
+  .hero-section p.text-body-lg { font-size: 14px !important; }
+  .hero-section .flex.items-center.gap-8.pt-4 { align-items: flex-start; flex-direction: column; gap: 22px !important; }
+  section.py-24 .grid { grid-template-columns: 1fr 1fr !important; gap: 34px 18px !important; }
+  .about-section h2, .strategy-section h2, .track-section h2, .contact-section h2 { font-size: 38px !important; }
+  .strategy-section .bg-surface-charcoal { padding: 28px !important; min-height: auto; }
+  .track-section .flex.flex-col.md\:flex-row { align-items: flex-start !important; }
+  .track-section .h-96 { height: 250px !important; }
+  footer .flex.gap-8 { flex-wrap: wrap; gap: 17px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ticker { animation: none; }
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

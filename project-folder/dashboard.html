@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Client Portal - Dashboard | PRESTIGE ALPHA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .glass-panel {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 208, 200, 0.1);
+        }
+        .chart-gradient {
+            background: linear-gradient(to bottom, rgba(201, 169, 110, 0.15), transparent);
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar for high-end terminal feel */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #353534; }
+        ::-webkit-scrollbar-thumb:hover { background: #C9A96E; }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed-dim": "#e4c285",
+                    "on-tertiary-fixed": "#1b1c1a",
+                    "primary-container": "#c9a96e",
+                    "surface-container-highest": "#353534",
+                    "on-secondary-container": "#b6b8be",
+                    "outline": "#998f81",
+                    "tertiary-fixed-dim": "#c8c6c3",
+                    "primary": "#e6c487",
+                    "tertiary-fixed": "#e4e2de",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed": "#e1e2e8",
+                    "tertiary-container": "#aeadaa",
+                    "surface-bright": "#3a3939",
+                    "on-primary-container": "#543d0c",
+                    "precision-gold": "#C9A96E",
+                    "tertiary": "#cac8c5",
+                    "surface-dim": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "error-container": "#93000a",
+                    "outline-variant": "#4d463a",
+                    "on-primary-fixed": "#261900",
+                    "on-secondary-fixed-variant": "#44474b",
+                    "on-secondary": "#2e3135",
+                    "slate-gray": "#D4D0C8",
+                    "surface": "#131313",
+                    "surface-variant": "#353534",
+                    "on-surface-variant": "#d0c5b5",
+                    "on-tertiary": "#30312e",
+                    "on-background": "#e5e2e1",
+                    "on-primary": "#412d00",
+                    "alpha-amber": "#E2B15B",
+                    "secondary-container": "#46494e",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed": "#191c20",
+                    "secondary-fixed-dim": "#c5c6cc",
+                    "secondary": "#c5c6cc",
+                    "error": "#ffb4ab",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#5a4312",
+                    "risk-crimson": "#D32F2F",
+                    "on-error": "#690005",
+                    "on-surface": "#e5e2e1",
+                    "inverse-primary": "#745a27",
+                    "primary-fixed": "#ffdea4",
+                    "on-tertiary-container": "#41413e",
+                    "surface-tint": "#e4c285",
+                    "background": "#131313",
+                    "success-emerald": "#2E7D32",
+                    "on-tertiary-fixed-variant": "#474744",
+                    "surface-charcoal": "#111111",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-low": "#1c1b1b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0rem",
+                    "lg": "0rem",
+                    "xl": "0rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding": "120px",
+                    "container-max": "1280px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "32px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "headline-md": ["EB Garamond"],
+                    "body-lg": ["Inter"],
+                    "stat-lg": ["EB Garamond"],
+                    "headline-lg-mobile": ["EB Garamond"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["EB Garamond"],
+                    "display-lg": ["EB Garamond"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "stat-lg": ["40px", {"lineHeight": "1", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<script>
+if (sessionStorage.getItem("prestigeAlphaAuthenticated") !== "true") {
+  window.location.replace("./login.html");
+}
+</script>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-charcoal/80 backdrop-blur-xl border-b border-slate-gray/10">
+<div class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md text-precision-gold tracking-tight">PRESTIGE ALPHA</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-precision-gold border-b-2 border-precision-gold pb-1 font-label-md text-label-md" href="./dashboard.html">Dashboard</a>
+<a class="text-on-surface-variant hover:text-precision-gold transition-colors font-label-md text-label-md" href="./analytics.html">Analytics</a>
+<a class="text-on-surface-variant hover:text-precision-gold transition-colors font-label-md text-label-md" href="#capital">Capital</a>
+<a class="text-on-surface-variant hover:text-precision-gold transition-colors font-label-md text-label-md" href="#reporting">Reporting</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-high/50 border border-slate-gray/10 px-3 py-1.5">
+<span class="material-symbols-outlined text-slate-gray/50 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md font-label-md w-48 text-on-surface" placeholder="Global Search..." type="text"/>
+</div>
+<div class="flex gap-3">
+<button class="cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-high/50 p-2">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+</button>
+<button class="cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-high/50 p-2">
+<span class="material-symbols-outlined text-on-surface">settings</span>
+</button>
+<div class="w-8 h-8 bg-precision-gold flex items-center justify-center">
+<span class="text-on-primary font-bold text-[10px]">JD</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-20 h-[calc(100vh-80px)] w-64 z-40 bg-surface-charcoal border-r border-slate-gray/10 hidden md:flex flex-col py-8">
+<div class="px-6 mb-8">
+<h2 class="font-headline-md text-headline-md text-precision-gold leading-none mb-1">Alpha Fund I</h2>
+<p class="font-label-md text-label-md text-slate-gray/40 uppercase tracking-widest">Quantitative Strategy</p>
+</div>
+<nav class="flex-1">
+<a class="text-precision-gold bg-surface-container-highest/30 border-l-4 border-precision-gold p-4 flex items-center gap-3 font-label-md text-label-md transition-all duration-200 ease-in-out" href="./dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Overview
+</a>
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="./analytics.html">
+<span class="material-symbols-outlined" data-icon="show_chart">show_chart</span>
+                    Performance
+</a>
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="./trades.html">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                    Trade Ledger
+</a>
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+                    Documents
+                </a>
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="shield_person">shield_person</span>
+                    Secure Message
+                </a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-precision-gold text-on-primary py-3 font-label-md text-label-md tracking-wider flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                    New Capital Request
+                </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-gutter max-w-[1400px]">
+<!-- Dashboard Header Summary -->
+<section class="mb-stack-lg">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Client Portal - Dashboard</h1>
+<p class="font-body-md text-slate-gray/60">Institutional Access | Account #IND-992-ALPHA</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-high text-on-surface font-label-md text-label-md border border-slate-gray/10 hover:bg-surface-container-highest transition-colors">EXPORT PDF</button>
+<button class="px-4 py-2 bg-precision-gold text-on-primary font-label-md text-label-md hover:brightness-110 transition-colors">INVEST MORE</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Stat Card 1 -->
+<div class="bg-surface-charcoal border border-slate-gray/10 p-6 flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-precision-gold/5 -rotate-12 translate-x-12 -translate-y-8 group-hover:bg-precision-gold/10 transition-all"></div>
+<span class="font-label-md text-label-md text-slate-gray/60 uppercase tracking-widest">Total Capital Account Value</span>
+<div class="flex items-baseline gap-2">
+<span class="font-stat-lg text-stat-lg text-on-surface">$1,250,000.00</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-charcoal border border-slate-gray/10 p-6 flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-success-emerald/5 -rotate-12 translate-x-12 -translate-y-8 group-hover:bg-success-emerald/10 transition-all"></div>
+<span class="font-label-md text-label-md text-slate-gray/60 uppercase tracking-widest">YTD Performance</span>
+<div class="flex items-center gap-2">
+<span class="font-stat-lg text-stat-lg text-success-emerald">+14.2%</span>
+<span class="material-symbols-outlined text-success-emerald">trending_up</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-charcoal border border-slate-gray/10 p-6 flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-alpha-amber/5 -rotate-12 translate-x-12 -translate-y-8 group-hover:bg-alpha-amber/10 transition-all"></div>
+<span class="font-label-md text-label-md text-slate-gray/60 uppercase tracking-widest">Active Allocation</span>
+<div class="flex items-baseline gap-2">
+<span class="font-stat-lg text-stat-lg text-on-surface">92.4%</span>
+<span class="font-label-md text-label-md text-slate-gray/40">Invested</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Large Equity Curve -->
+<section class="mb-stack-lg">
+<div class="bg-surface-charcoal border border-slate-gray/10 p-8">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Equity Growth Curve</h3>
+<p class="font-body-md text-slate-gray/60">Compounded return since inception vs Benchmark SPX</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-precision-gold"></div>
+<span class="font-label-md text-label-md text-on-surface">Alpha Strategy</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-slate-gray/40"></div>
+<span class="font-label-md text-label-md text-slate-gray/40">S&amp;P 500 Index</span>
+</div>
+</div>
+</div>
+<!-- Simplified Visual Representation of a chart -->
+<div class="h-80 w-full relative group">
+<!-- Chart Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-2">
+<div class="border-t border-slate-gray/5 w-full h-0"></div>
+<div class="border-t border-slate-gray/5 w-full h-0"></div>
+<div class="border-t border-slate-gray/5 w-full h-0"></div>
+<div class="border-t border-slate-gray/5 w-full h-0"></div>
+<div class="border-t border-slate-gray/5 w-full h-0"></div>
+</div>
+<!-- Benchmark Line -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<polyline fill="none" points="0,280 100,260 200,270 300,250 400,255 500,240 600,230 700,245 800,235 900,225 1000,210 1100,220" stroke="rgba(212, 208, 200, 0.2)" stroke-width="1.5"></polyline>
+</svg>
+<!-- Strategy Line & Area -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<defs>
+<lineargradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#C9A96E" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#C9A96E" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,280 L100,240 L200,210 L300,190 L400,160 L500,170 L600,140 L700,110 L800,120 L900,90 L1000,70 L1100,40 L1100,320 L0,320 Z" fill="url(#areaGradient)"></path>
+<polyline fill="none" points="0,280 100,240 200,210 300,190 400,160 500,170 600,140 700,110 800,120 900,90 1000,70 1100,40" stroke="#C9A96E" stroke-linejoin="round" stroke-width="3"></polyline>
+</svg>
+<!-- Tooltip Overlay (Interaction Simulator) -->
+<div class="absolute inset-0 flex">
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair">
+<div class="hidden group-hover/seg:block absolute bottom-full mb-4 left-1/2 -translate-x-1/2 glass-panel p-3 min-w-[120px] z-10">
+<p class="font-label-md text-label-md text-slate-gray/40 mb-1">SEP 2023</p>
+<p class="font-stat-lg text-[18px] text-precision-gold">$1.12M</p>
+<p class="font-label-md text-label-md text-success-emerald">+2.4% MoM</p>
+</div>
+</div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+<div class="flex-1 group/seg relative border-r border-transparent hover:border-precision-gold/20 hover:bg-precision-gold/[0.02] cursor-crosshair"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-between px-2 font-label-md text-label-md text-slate-gray/30">
+<span>OCT 22</span>
+<span>JAN 23</span>
+<span>APR 23</span>
+<span>JUL 23</span>
+<span>OCT 23</span>
+<span>TODAY</span>
+</div>
+</div>
+</section>
+<!-- Lower Bento Grid Sections -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Portfolio Breakdown (Left-Center) -->
+<div class="lg:col-span-2 bg-surface-charcoal border border-slate-gray/10 p-8">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-8">Asset Allocation</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<!-- Simulated Pie Chart -->
+<div class="relative w-full max-w-[240px] aspect-square mx-auto">
+<div class="absolute inset-0 rounded-full border-[24px] border-precision-gold" style="clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%);"></div>
+<div class="absolute inset-0 rounded-full border-[24px] border-alpha-amber/50" style="clip-path: polygon(50% 50%, 0% 50%, 0% 0%, 50% 0%);"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-stat-lg text-[28px] text-on-surface">Diversified</span>
+<span class="font-label-md text-label-md text-slate-gray/40">CORE PORTFOLIO</span>
+</div>
+</div>
+<!-- Legend and Data Table -->
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-3 border-b border-slate-gray/5">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-precision-gold"></div>
+<span class="font-label-md text-label-md text-on-surface">U.S. Equities</span>
+</div>
+<span class="font-body-md text-on-surface">65.0%</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-slate-gray/5">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-alpha-amber/50"></div>
+<span class="font-label-md text-label-md text-on-surface">Gov. Bonds</span>
+</div>
+<span class="font-body-md text-on-surface">22.4%</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-slate-gray/5">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-surface-container-highest"></div>
+<span class="font-label-md text-label-md text-on-surface">Commodities</span>
+</div>
+<span class="font-body-md text-on-surface">8.1%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-slate-gray/10"></div>
+<span class="font-label-md text-label-md text-on-surface">Cash Equiv.</span>
+</div>
+<span class="font-body-md text-on-surface">4.5%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity (Right) -->
+<div class="bg-surface-charcoal border border-slate-gray/10 p-8 h-full">
+<div class="flex justify-between items-baseline mb-8">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Activity</h3>
+<a class="font-label-md text-label-md text-precision-gold hover:underline" href="#">VIEW ALL</a>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4 group cursor-pointer">
+<div class="w-10 h-10 bg-surface-container-high flex items-center justify-center shrink-0 border border-slate-gray/10 group-hover:border-precision-gold/30 transition-colors">
+<span class="material-symbols-outlined text-precision-gold">arrow_downward</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold mb-1">Capital Contribution Received</p>
+<p class="font-label-md text-[11px] text-slate-gray/40">MAR 12, 2024 • BANK OF AMERICA</p>
+<p class="font-body-md text-on-surface-variant mt-1">+$50,000.00</p>
+</div>
+</div>
+<div class="flex gap-4 group cursor-pointer">
+<div class="w-10 h-10 bg-surface-container-high flex items-center justify-center shrink-0 border border-slate-gray/10 group-hover:border-precision-gold/30 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">description</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold mb-1">Monthly Statement Available</p>
+<p class="font-label-md text-[11px] text-slate-gray/40">MAR 01, 2024 • REPORTING</p>
+<p class="font-body-md text-on-surface-variant mt-1">FEBRUARY 2024 FISCAL REPORT</p>
+</div>
+</div>
+<div class="flex gap-4 group cursor-pointer">
+<div class="w-10 h-10 bg-surface-container-high flex items-center justify-center shrink-0 border border-slate-gray/10 group-hover:border-precision-gold/30 transition-colors">
+<span class="material-symbols-outlined text-alpha-amber">sync_alt</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold mb-1">Rebalancing Executed</p>
+<p class="font-label-md text-[11px] text-slate-gray/40">FEB 14, 2024 • QUANT SYSTEM</p>
+<p class="font-body-md text-on-surface-variant mt-1">12 POSITIONS MODIFIED</p>
+</div>
+</div>
+<div class="flex gap-4 group cursor-pointer">
+<div class="w-10 h-10 bg-surface-container-high flex items-center justify-center shrink-0 border border-slate-gray/10 group-hover:border-precision-gold/30 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">verified_user</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold mb-1">Security Audit Complete</p>
+<p class="font-label-md text-[11px] text-slate-gray/40">FEB 10, 2024 • SYSTEM</p>
+<p class="font-body-md text-on-surface-variant mt-1">NO THREATS DETECTED</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full py-12 mt-section-padding border-t border-slate-gray/10 flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto">
+<div class="mb-6 md:mb-0">
+<p class="font-label-md text-label-md text-slate-gray/40">© 2024 Prestige Alpha Management. All rights reserved. SEC Registered Investment Advisor.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-md text-label-md text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Disclosures</a>
+<a class="font-label-md text-label-md text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Contact Support</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- Decorative Atmosphere Background -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-20">
+
+</div>
+<script>
+        // Simple Micro-interactions for the Dashboard
+        document.querySelectorAll('.group\\/seg').forEach(segment => {
+            segment.addEventListener('mouseenter', () => {
+                // Future expansion: dynamic tooltip updates
+            });
+        });
+
+        // Simulating loading state for financial terminal feel
+        window.addEventListener('load', () => {
+            console.log("Terminal Initialized: Inderson Investment Group Portal v4.2.1");
+        });
+    </script>
+</body></html>
