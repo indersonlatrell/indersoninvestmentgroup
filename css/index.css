@@ -215,24 +215,3 @@ footer p { font-size: 12px !important; }
   .ticker { animation: none; }
   * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
-/* Force correct text colors */
-body,
-.hero-section,
-.hero-section h1,
-.hero-section h2,
-.hero-section h3,
-.hero-section p {
-  color: #e5e2e1;
-}
-
-.hero-section h1 {
-  color: #e5e2e1 !important;
-}
-
-.hero-section .alpha-text {
-  color: #c9a96e !important;
-}
-
-.hero-section .text-on-surface-variant {
-  color: #d0c5b5 !important;
-}
