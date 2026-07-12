@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Client Portal - Performance Analytics | PRESTIGE ALPHA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-fixed-dim": "#e4c285",
+                      "on-tertiary-fixed": "#1b1c1a",
+                      "primary-container": "#c9a96e",
+                      "surface-container-highest": "#353534",
+                      "on-secondary-container": "#b6b8be",
+                      "outline": "#998f81",
+                      "tertiary-fixed-dim": "#c8c6c3",
+                      "primary": "#e6c487",
+                      "tertiary-fixed": "#e4e2de",
+                      "inverse-on-surface": "#313030",
+                      "secondary-fixed": "#e1e2e8",
+                      "tertiary-container": "#aeadaa",
+                      "surface-bright": "#3a3939",
+                      "on-primary-container": "#543d0c",
+                      "precision-gold": "#C9A96E",
+                      "tertiary": "#cac8c5",
+                      "surface-dim": "#131313",
+                      "surface-container-high": "#2a2a2a",
+                      "error-container": "#93000a",
+                      "outline-variant": "#4d463a",
+                      "on-primary-fixed": "#261900",
+                      "on-secondary-fixed-variant": "#44474b",
+                      "on-secondary": "#2e3135",
+                      "slate-gray": "#D4D0C8",
+                      "surface": "#131313",
+                      "surface-variant": "#353534",
+                      "on-surface-variant": "#d0c5b5",
+                      "on-tertiary": "#30312e",
+                      "on-background": "#e5e2e1",
+                      "on-primary": "#412d00",
+                      "alpha-amber": "#E2B15B",
+                      "secondary-container": "#46494e",
+                      "surface-container": "#201f1f",
+                      "on-secondary-fixed": "#191c20",
+                      "secondary-fixed-dim": "#c5c6cc",
+                      "secondary": "#c5c6cc",
+                      "error": "#ffb4ab",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#5a4312",
+                      "risk-crimson": "#D32F2F",
+                      "on-error": "#690005",
+                      "on-surface": "#e5e2e1",
+                      "inverse-primary": "#745a27",
+                      "primary-fixed": "#ffdea4",
+                      "on-tertiary-container": "#41413e",
+                      "surface-tint": "#e4c285",
+                      "background": "#131313",
+                      "success-emerald": "#2E7D32",
+                      "on-tertiary-fixed-variant": "#474744",
+                      "surface-charcoal": "#111111",
+                      "inverse-surface": "#e5e2e1",
+                      "surface-container-low": "#1c1b1b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-padding": "120px",
+                      "container-max": "1280px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px",
+                      "gutter": "32px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "headline-md": ["EB Garamond"],
+                      "body-lg": ["Inter"],
+                      "stat-lg": ["EB Garamond"],
+                      "headline-lg-mobile": ["EB Garamond"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["EB Garamond"],
+                      "display-lg": ["EB Garamond"]
+              },
+              "fontSize": {
+                      "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                      "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "stat-lg": ["40px", {"lineHeight": "1", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                      "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .heatmap-cell {
+            transition: all 0.2s ease;
+        }
+        .heatmap-cell:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(201, 169, 110, 0.3);
+        }
+        .glass-panel {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 208, 200, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #C9A96E;
+            border-radius: 2px;
+        }
+    </style>
+<script>
+  if (sessionStorage.getItem('prestigeAlphaAuthenticated') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+</head>
+<body class="bg-surface-dim text-on-surface font-body-md selection:bg-precision-gold selection:text-surface-charcoal">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-charcoal/80 backdrop-blur-xl border-b border-slate-gray/10">
+<div class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-precision-gold tracking-tight">PRESTIGE ALPHA</div>
+<nav class="hidden md:flex items-center gap-8 font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-precision-gold transition-colors" href="dashboard.html">Dashboard</a>
+<a class="text-precision-gold border-b-2 border-precision-gold pb-1" href="analytics.html">Analytics</a>
+<a class="text-on-surface-variant hover:text-precision-gold transition-colors" href="dashboard.html#allocation">Capital</a>
+<a class="text-on-surface-variant hover:text-precision-gold transition-colors" href="trades.html">Reporting</a>
+</nav>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container-high/50 px-4 py-2 border border-slate-gray/10 rounded-none">
+<span class="material-symbols-outlined text-slate-gray/60 text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md w-48 text-on-surface placeholder:text-slate-gray/40" placeholder="Search parameters..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="cursor-pointer active:scale-95 transition-transform text-on-surface-variant hover:text-precision-gold">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="cursor-pointer active:scale-95 transition-transform text-on-surface-variant hover:text-precision-gold">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-precision-gold/30 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Institutional executive portrait, professional lighting, corporate dark grey background, high-end financial aesthetic, sharp suit, looking confident." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCZPnIC_wIDRr8qy68yq6eDNs6q--S5VJwY8PC-9prcG6kf9zLRMYxqxPVtuP4r7tvWxW3vc8ZJfzstW-J5wHGBr9bbChz3-vkIN5uDZS4Zn_r6oMgnRyCgx9SPmb1t1MLRQHykhSvuo2BZp-1RrzwOF-m9_AQnv1RF2oDUAAwXkZpkB4UgRS4rwFw4mMOsJReD5IY7RzBM1LkMutWFp5rNbUBZWjEcyhoOg2fZmKbvGt6YzlBShSbyw"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-charcoal border-r border-slate-gray/10 hidden xl:flex flex-col pt-24 pb-8">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 bg-precision-gold flex items-center justify-center text-surface-charcoal font-bold">A</div>
+<div>
+<div class="font-headline-md text-lg text-precision-gold leading-none">Alpha Fund I</div>
+<div class="text-[10px] uppercase tracking-widest text-slate-gray/50 mt-1 font-label-md">Quantitative Strategy</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span> Overview
+            </a>
+<a class="text-precision-gold bg-surface-container-highest/30 border-l-4 border-precision-gold p-4 flex items-center gap-3 font-label-md text-label-md" href="analytics.html">
+<span class="material-symbols-outlined">show_chart</span> Performance
+            </a>
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="trades.html">
+<span class="material-symbols-outlined">receipt_long</span> Trade Ledger
+            </a>
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">folder_shared</span> Documents
+            </a>
+<a class="text-slate-gray/60 p-4 flex items-center gap-3 hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">shield_person</span> Secure Message
+            </a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 bg-precision-gold text-surface-charcoal font-label-md text-label-md font-bold transition-all active:scale-95">
+                New Capital Request
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="xl:ml-64 pt-28 px-gutter pb-section-padding min-h-screen max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Performance Analytics</h1>
+<p class="text-slate-gray/60 font-body-md max-w-2xl">Quantitative rigorous analysis of Alpha Fund I relative to its primary benchmarks. Last updated: Oct 24, 2024 16:00 EST.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-6 py-2 border border-slate-gray/20 hover:border-precision-gold text-slate-gray hover:text-precision-gold transition-all font-label-md text-label-md">
+                    EXPORT PDF
+                </button>
+<button class="px-6 py-2 bg-surface-container-highest border border-slate-gray/10 text-on-surface font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_month</span> ALL TIME
+                </button>
+</div>
+</div>
+<!-- Key Risk Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+<div class="glass-panel p-6">
+<div class="text-slate-gray/40 font-label-md text-label-md mb-4 uppercase tracking-widest">Sharpe Ratio</div>
+<div class="font-stat-lg text-stat-lg text-precision-gold">2.84</div>
+<div class="mt-2 flex items-center gap-2 text-success-emerald font-label-md text-[10px]">
+<span class="material-symbols-outlined text-xs">trending_up</span> +0.12 vs Previous Q
+                </div>
+</div>
+<div class="glass-panel p-6">
+<div class="text-slate-gray/40 font-label-md text-label-md mb-4 uppercase tracking-widest">Max Drawdown</div>
+<div class="font-stat-lg text-stat-lg text-on-surface">-4.12%</div>
+<div class="mt-2 text-slate-gray/40 font-label-md text-[10px]">Peak-to-Trough (12M)</div>
+</div>
+<div class="glass-panel p-6">
+<div class="text-slate-gray/40 font-label-md text-label-md mb-4 uppercase tracking-widest">Annualized Vol</div>
+<div class="font-stat-lg text-stat-lg text-on-surface">8.40%</div>
+<div class="mt-2 text-slate-gray/40 font-label-md text-[10px]">Standard Deviation</div>
+</div>
+<div class="glass-panel p-6">
+<div class="text-slate-gray/40 font-label-md text-label-md mb-4 uppercase tracking-widest">Alpha vs Benchmark</div>
+<div class="font-stat-lg text-stat-lg text-alpha-amber">12.1%</div>
+<div class="mt-2 text-slate-gray/40 font-label-md text-[10px]">Excess Return</div>
+</div>
+</div>
+<!-- Benchmark Comparison Chart -->
+<div class="glass-panel p-8 mb-12">
+<div class="flex justify-between items-center mb-10">
+<h3 class="font-headline-md text-2xl">Cumulative Performance</h3>
+<div class="flex gap-6 items-center text-label-md font-label-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-precision-gold"></span> Alpha Fund I
+                    </div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-slate-gray/30"></span> S&amp;P 500 TR
+                    </div>
+</div>
+</div>
+<div class="relative h-[400px] w-full">
+<!-- SVG Chart Mockup -->
+<svg class="w-full h-full" viewbox="0 0 1000 400">
+<!-- Grid Lines -->
+<line class="text-slate-gray/10" stroke="currentColor" stroke-width="1" x1="0" x2="1000" y1="350" y2="350"></line>
+<line class="text-slate-gray/10" stroke="currentColor" stroke-width="1" x1="0" x2="1000" y1="250" y2="250"></line>
+<line class="text-slate-gray/10" stroke="currentColor" stroke-width="1" x1="0" x2="1000" y1="150" y2="150"></line>
+<line class="text-slate-gray/10" stroke="currentColor" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<!-- Benchmark Line -->
+<path class="text-slate-gray/20" d="M0 350 L100 340 L200 345 L300 320 L400 330 L500 300 L600 310 L700 280 L800 290 L900 260 L1000 270" fill="none" stroke="currentColor" stroke-dasharray="4" stroke-width="2"></path>
+<!-- Performance Line -->
+<path d="M0 350 L100 310 L200 290 L300 250 L400 220 L500 180 L600 140 L700 110 L800 80 L900 60 L1000 30" fill="none" stroke="#C9A96E" stroke-width="3"></path>
+<!-- Dynamic Interaction Elements -->
+<circle cx="800" cy="80" fill="#C9A96E" r="6"></circle>
+<line opacity="0.3" stroke="#C9A96E" stroke-dasharray="4" stroke-width="1" x1="800" x2="800" y1="0" y2="400"></line>
+</svg>
+<!-- Tooltip Mockup -->
+<div class="absolute top-10 left-[75%] glass-panel p-3 text-[10px] font-label-md">
+<div class="text-slate-gray/50 mb-1">SEP 2024</div>
+<div class="text-precision-gold">FUND: +24.2%</div>
+<div class="text-slate-gray">BENCH: +8.1%</div>
+</div>
+</div>
+</div>
+<!-- Monthly Returns Heatmap -->
+<div class="glass-panel p-8">
+<h3 class="font-headline-md text-2xl mb-8">Monthly Returns Matrix (%)</h3>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-center border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-slate-gray/10">
+<th class="py-4 font-label-md text-slate-gray/40 uppercase text-left w-20">Year</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Jan</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Feb</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Mar</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Apr</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">May</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Jun</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Jul</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Aug</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Sep</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Oct</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Nov</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase">Dec</th>
+<th class="py-4 font-label-md text-slate-gray/40 uppercase border-l border-slate-gray/10">YTD</th>
+</tr>
+</thead>
+<tbody class="font-body-md">
+<!-- 2024 -->
+<tr class="border-b border-slate-gray/5">
+<td class="py-4 text-left font-bold text-on-surface">2024</td>
+<td class="p-1"><div class="bg-success-emerald/20 text-success-emerald py-3 heatmap-cell">+1.2</div></td>
+<td class="p-1"><div class="bg-success-emerald/40 text-success-emerald py-3 heatmap-cell">+2.8</div></td>
+<td class="p-1"><div class="bg-risk-crimson/20 text-risk-crimson py-3 heatmap-cell">-0.5</div></td>
+<td class="p-1"><div class="bg-success-emerald/10 text-success-emerald py-3 heatmap-cell">+0.4</div></td>
+<td class="p-1"><div class="bg-success-emerald/30 text-success-emerald py-3 heatmap-cell">+1.9</div></td>
+<td class="p-1"><div class="bg-success-emerald/50 text-success-emerald py-3 heatmap-cell">+3.4</div></td>
+<td class="p-1"><div class="bg-risk-crimson/30 text-risk-crimson py-3 heatmap-cell">-1.2</div></td>
+<td class="p-1"><div class="bg-success-emerald/40 text-success-emerald py-3 heatmap-cell">+2.1</div></td>
+<td class="p-1"><div class="bg-success-emerald/60 text-success-emerald py-3 heatmap-cell">+4.2</div></td>
+<td class="p-1"><div class="bg-surface-container-highest/50 text-slate-gray/40 py-3">...</div></td>
+<td class="p-1"><div class="bg-surface-container-highest/50 text-slate-gray/40 py-3">...</div></td>
+<td class="p-1"><div class="bg-surface-container-highest/50 text-slate-gray/40 py-3">...</div></td>
+<td class="py-4 font-bold text-precision-gold border-l border-slate-gray/10">+15.2</td>
+</tr>
+<!-- 2023 -->
+<tr class="border-b border-slate-gray/5">
+<td class="py-4 text-left font-bold text-on-surface">2023</td>
+<td class="p-1"><div class="bg-success-emerald/30 text-success-emerald py-3 heatmap-cell">+2.1</div></td>
+<td class="p-1"><div class="bg-success-emerald/10 text-success-emerald py-3 heatmap-cell">+0.8</div></td>
+<td class="p-1"><div class="bg-success-emerald/40 text-success-emerald py-3 heatmap-cell">+2.5</div></td>
+<td class="p-1"><div class="bg-risk-crimson/10 text-risk-crimson py-3 heatmap-cell">-0.2</div></td>
+<td class="p-1"><div class="bg-success-emerald/20 text-success-emerald py-3 heatmap-cell">+1.1</div></td>
+<td class="p-1"><div class="bg-success-emerald/40 text-success-emerald py-3 heatmap-cell">+2.9</div></td>
+<td class="p-1"><div class="bg-success-emerald/50 text-success-emerald py-3 heatmap-cell">+3.8</div></td>
+<td class="p-1"><div class="bg-risk-crimson/20 text-risk-crimson py-3 heatmap-cell">-0.8</div></td>
+<td class="p-1"><div class="bg-success-emerald/20 text-success-emerald py-3 heatmap-cell">+1.4</div></td>
+<td class="p-1"><div class="bg-success-emerald/40 text-success-emerald py-3 heatmap-cell">+2.7</div></td>
+<td class="p-1"><div class="bg-success-emerald/30 text-success-emerald py-3 heatmap-cell">+1.9</div></td>
+<td class="p-1"><div class="bg-success-emerald/50 text-success-emerald py-3 heatmap-cell">+4.1</div></td>
+<td class="py-4 font-bold text-precision-gold border-l border-slate-gray/10">+22.1</td>
+</tr>
+<!-- 2022 -->
+<tr class="border-b border-slate-gray/5">
+<td class="py-4 text-left font-bold text-on-surface">2022</td>
+<td class="p-1"><div class="bg-risk-crimson/30 text-risk-crimson py-3 heatmap-cell">-1.5</div></td>
+<td class="p-1"><div class="bg-success-emerald/10 text-success-emerald py-3 heatmap-cell">+0.3</div></td>
+<td class="p-1"><div class="bg-success-emerald/20 text-success-emerald py-3 heatmap-cell">+1.2</div></td>
+<td class="p-1"><div class="bg-risk-crimson/40 text-risk-crimson py-3 heatmap-cell">-2.4</div></td>
+<td class="p-1"><div class="bg-success-emerald/10 text-success-emerald py-3 heatmap-cell">+0.5</div></td>
+<td class="p-1"><div class="bg-risk-crimson/30 text-risk-crimson py-3 heatmap-cell">-1.8</div></td>
+<td class="p-1"><div class="bg-success-emerald/30 text-success-emerald py-3 heatmap-cell">+2.2</div></td>
+<td class="p-1"><div class="bg-success-emerald/10 text-success-emerald py-3 heatmap-cell">+0.9</div></td>
+<td class="p-1"><div class="bg-risk-crimson/20 text-risk-crimson py-3 heatmap-cell">-0.7</div></td>
+<td class="p-1"><div class="bg-success-emerald/40 text-success-emerald py-3 heatmap-cell">+2.6</div></td>
+<td class="p-1"><div class="bg-success-emerald/20 text-success-emerald py-3 heatmap-cell">+1.5</div></td>
+<td class="p-1"><div class="bg-success-emerald/30 text-success-emerald py-3 heatmap-cell">+2.1</div></td>
+<td class="py-4 font-bold text-precision-gold border-l border-slate-gray/10">+4.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-8 flex justify-between items-center text-label-md font-label-md text-slate-gray/40">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-success-emerald"></span> POSITIVE RETURN
+                    </div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-risk-crimson"></span> NEGATIVE RETURN
+                    </div>
+</div>
+<div class="italic">* All returns net of fees. Past performance is not indicative of future results.</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 mt-section-padding border-t border-slate-gray/10 bg-surface-container-lowest">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto">
+<div class="mb-6 md:mb-0">
+<div class="font-headline-md text-headline-md text-precision-gold mb-2">PRESTIGE ALPHA</div>
+<p class="font-label-md text-label-md text-slate-gray/40">© 2024 Prestige Alpha Management. All rights reserved. SEC Registered Investment Advisor.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-label-md text-label-md">
+<a class="text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Disclosures</a>
+<a class="text-slate-gray/40 hover:text-slate-gray transition-colors hover:underline" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for heatmap cells
+        document.querySelectorAll('.heatmap-cell').forEach(cell => {
+            cell.addEventListener('mouseenter', () => {
+                // Potential for adding tooltips dynamically
+            });
+        });
+    </script>
+
+<script>
+  document.querySelectorAll('[data-icon="settings"], .material-symbols-outlined').forEach((icon) => {
+    if (icon.textContent.trim() === 'settings') {
+      const trigger = icon.closest('button') || icon;
+      trigger.setAttribute('title', 'Sign out');
+      trigger.addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location.href = 'login.html';
+      });
+    }
+  });
+</script>
+</body></html>
