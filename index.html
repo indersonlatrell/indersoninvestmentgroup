@@ -1,1235 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inderson Investment Group</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --black: #0a0a0a;
-    --off-black: #111111;
-    --dark: #1a1a1a;
-    --mid: #2e2e2e;
-    --gold: #c9a96e;
-    --gold-light: #e2c99a;
-    --gold-dim: #8a7050;
-    --white: #f5f3ef;
-    --white-dim: #d4d0c8;
-    --cream: #ede9e0;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Montserrat', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: var(--sans);
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 28px 60px;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .nav-logo-mark {
-    width: 36px;
-    height: 36px;
-  }
-
-  .nav-logo-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-
-  .nav-logo-name {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--white);
-  }
-
-  .nav-logo-sub {
-    font-family: var(--sans);
-    font-size: 8px;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    color: var(--gold);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: var(--white-dim);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-
-  .nav-cta {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold-dim);
-    padding: 10px 24px;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-
-  .nav-cta:hover {
-    background: var(--gold);
-    color: var(--black);
-  }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 140px 60px 80px 60px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-eyebrow {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 1s 0.2s forwards;
-  }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(52px, 6vw, 84px);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--white);
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 1s 0.4s forwards;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
-
-  .hero-desc {
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--white-dim);
-    max-width: 400px;
-    margin-bottom: 56px;
-    opacity: 0;
-    animation: fadeUp 1s 0.6s forwards;
-  }
-
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    opacity: 0;
-    animation: fadeUp 1s 0.8s forwards;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 16px 40px;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-
-  .btn-primary:hover {
-    background: var(--gold-light);
-  }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--white-dim);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .btn-ghost:hover { color: var(--gold); }
-
-  .btn-ghost::after {
-    content: '';
-    display: block;
-    width: 32px;
-    height: 1px;
-    background: currentColor;
-    transition: width 0.3s;
-  }
-
-  .btn-ghost:hover::after { width: 48px; }
-
-  .hero-right {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-visual {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-grid-bg {
-    position: absolute;
-    inset: 0;
-    opacity: 0.06;
-    background-image:
-      linear-gradient(rgba(201,169,110,1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,169,110,1) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  .hero-chart-svg {
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    animation: fadeIn 1.5s 1s forwards;
-  }
-
-  .ticker-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(201,169,110,0.08);
-    border-top: 1px solid rgba(201,169,110,0.2);
-    padding: 12px 60px;
-    display: flex;
-    gap: 48px;
-    overflow: hidden;
-  }
-
-  .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    white-space: nowrap;
-  }
-
-  .ticker-pair { color: var(--white-dim); }
-  .ticker-val { color: var(--white); }
-  .ticker-chg.up { color: #6fcf97; }
-  .ticker-chg.dn { color: #eb5757; }
-
-  .hero-divider {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.3) 30%, rgba(201,169,110,0.3) 70%, transparent);
-    z-index: 3;
-  }
-
-  /* STATS */
-  .stats-section {
-    padding: 100px 60px;
-    border-top: 1px solid rgba(201,169,110,0.12);
-    border-bottom: 1px solid rgba(201,169,110,0.12);
-    background: var(--off-black);
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(201,169,110,0.12);
-  }
-
-  .stat-cell {
-    background: var(--off-black);
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-  }
-
-  .stat-cell:hover { background: rgba(201,169,110,0.04); }
-
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 56px;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .stat-num span {
-    color: var(--gold);
-    font-style: italic;
-  }
-
-  .stat-label {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold-dim);
-  }
-
-  /* ABOUT */
-  .about-section {
-    padding: 130px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-
-  .section-tag {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .section-tag::before {
-    content: '';
-    display: block;
-    width: 32px;
-    height: 1px;
-    background: var(--gold-dim);
-  }
-
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(38px, 4vw, 58px);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--white);
-    margin-bottom: 32px;
-  }
-
-  .section-title em { font-style: italic; color: var(--gold-light); }
-
-  .section-body {
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--white-dim);
-    margin-bottom: 20px;
-  }
-
-  .about-geo {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .geo-card {
-    padding: 28px 32px;
-    border: 1px solid rgba(201,169,110,0.15);
-    position: relative;
-    transition: border-color 0.3s;
-  }
-
-  .geo-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--gold);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .geo-card:hover { border-color: rgba(201,169,110,0.4); }
-  .geo-card:hover::before { opacity: 1; }
-
-  .geo-market {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-
-  .geo-desc {
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--white-dim);
-  }
-
-  /* STRATEGY */
-  .strategy-section {
-    padding: 130px 60px;
-    background: var(--off-black);
-  }
-
-  .strategy-header {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 80px;
-  }
-
-  .strategy-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    background: rgba(201,169,110,0.1);
-  }
-
-  .strategy-card {
-    background: var(--off-black);
-    padding: 48px 40px;
-    transition: background 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .strategy-card:hover { background: rgba(201,169,110,0.04); }
-
-  .strategy-num {
-    font-family: var(--serif);
-    font-size: 72px;
-    font-weight: 300;
-    color: rgba(201,169,110,0.12);
-    line-height: 1;
-    margin-bottom: 32px;
-    font-style: italic;
-  }
-
-  .strategy-name {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-
-  .strategy-text {
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.85;
-    color: var(--white-dim);
-  }
-
-  /* PROCESS */
-  .process-section {
-    padding: 130px 60px;
-  }
-
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin-top: 80px;
-    position: relative;
-  }
-
-  .process-steps::before {
-    content: '';
-    position: absolute;
-    top: 32px;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent);
-  }
-
-  .process-step {
-    padding: 0 24px;
-    text-align: center;
-  }
-
-  .step-dot {
-    width: 64px;
-    height: 64px;
-    border: 1px solid rgba(201,169,110,0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 24px;
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 300;
-    color: var(--gold);
-    transition: all 0.3s;
-    position: relative;
-    z-index: 1;
-    background: var(--black);
-  }
-
-  .process-step:hover .step-dot {
-    background: var(--gold);
-    color: var(--black);
-    border-color: var(--gold);
-  }
-
-  .step-name {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-
-  .step-text {
-    font-size: 11px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--white-dim);
-  }
-
-  /* CTA */
-  .cta-section {
-    padding: 160px 60px;
-    background: var(--off-black);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-bg-geo {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.04;
-    pointer-events: none;
-  }
-
-  .cta-title {
-    font-family: var(--serif);
-    font-size: clamp(44px, 5vw, 72px);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--white);
-    max-width: 700px;
-    margin: 0 auto 24px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .cta-title em { font-style: italic; color: var(--gold-light); }
-
-  .cta-sub {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--white-dim);
-    margin-bottom: 56px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .cta-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 60px;
-    border-top: 1px solid rgba(201,169,110,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .footer-legal {
-    font-size: 10px;
-    font-weight: 300;
-    color: var(--gold-dim);
-    letter-spacing: 0.05em;
-    max-width: 500px;
-    line-height: 1.7;
-    text-align: right;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  .ticker-inner {
-    display: flex;
-    gap: 48px;
-    animation: ticker 40s linear infinite;
-    width: max-content;
-  }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.8s, transform 0.8s;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <svg class="nav-logo-mark" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="40" y="4" width="44" height="44" rx="1" transform="rotate(45 40 4)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
-      <rect x="40" y="14" width="32" height="32" rx="1" transform="rotate(45 40 14)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
-      <rect x="40" y="24" width="20" height="20" rx="1" transform="rotate(45 40 24)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
-      <rect x="40" y="33" width="10" height="10" rx="1" transform="rotate(45 40 33)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
-    </svg>
-    <div class="nav-logo-text">
-      <span class="nav-logo-name">INDERSON</span>
-      <span class="nav-logo-sub">INVESTMENT GROUP</span>
-    </div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#strategy">Strategy</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Investor Relations</a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Forex · Futures · Alternative Assets</p>
-    <h1 class="hero-title">Capital<br>Allocated with<br><em>Precision.</em></h1>
-    <p class="hero-desc">
-      Inderson Investment Group deploys investor capital across global forex and futures markets — driven by rigorous quantitative research and disciplined risk management.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Explore Opportunities</a>
-      <a href="#strategy" class="btn-ghost">Our Approach</a>
-    </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="hero-grid-bg"></div>
-    <div class="hero-visual">
-      <svg class="hero-chart-svg" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <path d="M40,380 L80,340 L120,310 L160,290 L200,260 L240,230 L280,200 L320,190 L360,160 L400,140 L440,120 L480,100 L520,90 L560,80 L560,480 L40,480 Z" fill="url(#areaGrad)"/>
-        <path d="M40,380 L80,340 L120,310 L160,290 L200,260 L240,230 L280,200 L320,190 L360,160 L400,140 L440,120 L480,100 L520,90 L560,80" fill="none" stroke="#c9a96e" stroke-width="1.5" stroke-linejoin="round"/>
-        <g opacity="0.7">
-          <line x1="60" y1="310" x2="60" y2="370" stroke="#8a7050" stroke-width="1"/>
-          <line x1="100" y1="280" x2="100" y2="350" stroke="#8a7050" stroke-width="1"/>
-          <line x1="140" y1="260" x2="140" y2="320" stroke="#8a7050" stroke-width="1"/>
-          <line x1="180" y1="230" x2="180" y2="295" stroke="#8a7050" stroke-width="1"/>
-          <line x1="220" y1="210" x2="220" y2="270" stroke="#8a7050" stroke-width="1"/>
-          <line x1="260" y1="180" x2="260" y2="245" stroke="#8a7050" stroke-width="1"/>
-          <line x1="300" y1="160" x2="300" y2="215" stroke="#8a7050" stroke-width="1"/>
-          <line x1="340" y1="140" x2="340" y2="195" stroke="#8a7050" stroke-width="1"/>
-          <line x1="380" y1="118" x2="380" y2="168" stroke="#8a7050" stroke-width="1"/>
-          <line x1="420" y1="96" x2="420" y2="148" stroke="#8a7050" stroke-width="1"/>
-          <line x1="460" y1="78" x2="460" y2="128" stroke="#8a7050" stroke-width="1"/>
-          <line x1="500" y1="62" x2="500" y2="108" stroke="#8a7050" stroke-width="1"/>
-          <rect x="52" y="330" width="16" height="30" rx="1" fill="#4a8c6a" opacity="0.8"/>
-          <rect x="92" y="295" width="16" height="35" rx="1" fill="#8c4a4a" opacity="0.8"/>
-          <rect x="132" y="278" width="16" height="28" rx="1" fill="#4a8c6a" opacity="0.8"/>
-          <rect x="172" y="248" width="16" height="30" rx="1" fill="#4a8c6a" opacity="0.8"/>
-          <rect x="212" y="224" width="16" height="26" rx="1" fill="#8c4a4a" opacity="0.8"/>
-          <rect x="252" y="196" width="16" height="28" rx="1" fill="#4a8c6a" opacity="0.8"/>
-          <rect x="292" y="172" width="16" height="24" rx="1" fill="#4a8c6a" opacity="0.8"/>
-          <rect x="332" y="150" width="16" height="26" rx="1" fill="#c9a96e" opacity="0.9"/>
-          <rect x="372" y="128" width="16" height="22" rx="1" fill="#4a8c6a" opacity="0.8"/>
-          <rect x="412" y="108" width="16" height="20" rx="1" fill="#4a8c6a" opacity="0.8"/>
-          <rect x="452" y="88" width="16" height="22" rx="1" fill="#c9a96e" opacity="0.9"/>
-          <rect x="492" y="70" width="16" height="20" rx="1" fill="#4a8c6a" opacity="0.8"/>
-        </g>
-        <text x="40" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">JAN</text>
-        <text x="180" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">APR</text>
-        <text x="340" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">JUL</text>
-        <text x="490" y="474" fill="#8a7050" font-family="Montserrat, sans-serif" font-size="9" letter-spacing="0.1em">OCT</text>
-        <text x="490" y="72" fill="#c9a96e" font-family="Cormorant Garamond, serif" font-size="13" font-style="italic">+31.4%</text>
-        <line x1="40" y1="180" x2="560" y2="180" stroke="rgba(201,169,110,0.08)" stroke-width="1" stroke-dasharray="4,6"/>
-        <line x1="40" y1="280" x2="560" y2="280" stroke="rgba(201,169,110,0.08)" stroke-width="1" stroke-dasharray="4,6"/>
-        <line x1="40" y1="380" x2="560" y2="380" stroke="rgba(201,169,110,0.08)" stroke-width="1" stroke-dasharray="4,6"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="hero-divider"></div>
-
-  <div class="ticker-bar" style="grid-column: 1/-1;">
-    <div class="ticker-inner">
-      <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-val">1.0842</span><span class="ticker-chg up">+0.18%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">GBP/USD</span><span class="ticker-val">1.2731</span><span class="ticker-chg up">+0.24%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-val">149.82</span><span class="ticker-chg dn">−0.31%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-val">2,388.40</span><span class="ticker-chg up">+0.52%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">CRUDE OIL</span><span class="ticker-val">79.14</span><span class="ticker-chg dn">−0.19%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">S&amp;P 500 FUT</span><span class="ticker-val">5,214.25</span><span class="ticker-chg up">+0.38%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">AUD/USD</span><span class="ticker-val">0.6548</span><span class="ticker-chg up">+0.11%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">USD/CHF</span><span class="ticker-val">0.9012</span><span class="ticker-chg dn">−0.08%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-val">1.0842</span><span class="ticker-chg up">+0.18%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">GBP/USD</span><span class="ticker-val">1.2731</span><span class="ticker-chg up">+0.24%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-val">149.82</span><span class="ticker-chg dn">−0.31%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-val">2,388.40</span><span class="ticker-chg up">+0.52%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">CRUDE OIL</span><span class="ticker-val">79.14</span><span class="ticker-chg dn">−0.19%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">S&amp;P 500 FUT</span><span class="ticker-val">5,214.25</span><span class="ticker-chg up">+0.38%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">AUD/USD</span><span class="ticker-val">0.6548</span><span class="ticker-chg up">+0.11%</span></div>
-      <div class="ticker-item"><span class="ticker-pair">USD/CHF</span><span class="ticker-val">0.9012</span><span class="ticker-chg dn">−0.08%</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats-section">
-  <div class="stats-grid">
-    <div class="stat-cell reveal">
-      <div class="stat-num">$<span>25</span>K+</div>
-      <div class="stat-label">Capital under management</div>
-    </div>
-    <div class="stat-cell reveal">
-      <div class="stat-num"><span>18</span>%</div>
-      <div class="stat-label">Avg. Annual Return</div>
-    </div>
-    <div class="stat-cell reveal">
-      <div class="stat-num"><span>3</span>+</div>
-      <div class="stat-label">Years in Operation</div>
-    </div>
-    <div class="stat-cell reveal">
-      <div class="stat-num"><span>0.82</span></div>
-      <div class="stat-label">Sharpe Ratio (3Y)</div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about-section" id="about">
-  <div>
-    <p class="section-tag reveal">About</p>
-    <h2 class="section-title reveal">Where discipline<br>meets <em>opportunity.</em></h2>
-    <p class="section-body reveal">
-      Founded on a belief that markets reward preparation over intuition, Inderson Investment Group has built a systematic approach to trading forex and futures markets across global time zones.
-    </p>
-    <p class="section-body reveal">
-      We combine proprietary algorithmic signals with seasoned discretionary oversight — ensuring our capital deployment is both data-driven and contextually aware of macro conditions.
-    </p>
-  </div>
-
-  <div class="about-geo reveal">
-    <div class="geo-card">
-      <div class="geo-market">Forex Markets</div>
-      <div class="geo-desc">Major, minor, and exotic currency pairs across London, New York, and Tokyo sessions. Specializing in momentum and mean-reversion strategies.</div>
-    </div>
-    <div class="geo-card">
-      <div class="geo-market">Futures Markets</div>
-      <div class="geo-desc">Commodity, index, and interest rate futures. Positioned to benefit from both trending and ranging macro environments.</div>
-    </div>
-    <div class="geo-card">
-      <div class="geo-market">Risk Management</div>
-      <div class="geo-desc">Every position is governed by strict drawdown limits, position sizing protocols, and portfolio-level correlation controls.</div>
-    </div>
-  </div>
-</section>
-
-<!-- STRATEGY -->
-<section class="strategy-section" id="strategy">
-  <div class="strategy-header">
-    <p class="section-tag reveal" style="justify-content: center;">Strategy</p>
-    <h2 class="section-title reveal" style="text-align: center;">Three pillars of<br><em>sustainable alpha.</em></h2>
-  </div>
-
-  <div class="strategy-grid">
-    <div class="strategy-card reveal">
-      <div class="strategy-num">01</div>
-      <h3 class="strategy-name">Systematic Research</h3>
-      <p class="strategy-text">Quantitative models screen thousands of market conditions daily, identifying high-probability setups with asymmetric risk-reward profiles across correlated instruments.</p>
-    </div>
-    <div class="strategy-card reveal">
-      <div class="strategy-num">02</div>
-      <h3 class="strategy-name">Macro Alignment</h3>
-      <p class="strategy-text">All positions are filtered through a top-down macro framework — ensuring our trade thesis is consistent with broader central bank policy, liquidity cycles, and geopolitical flows.</p>
-    </div>
-    <div class="strategy-card reveal">
-      <div class="strategy-num">03</div>
-      <h3 class="strategy-name">Dynamic Risk Control</h3>
-      <p class="strategy-text">Volatility-adjusted position sizing, real-time drawdown monitoring, and portfolio heat mapping ensure capital preservation remains the foundation of every allocation decision.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="process-section" id="process">
-  <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-    <p class="section-tag reveal" style="justify-content: center;">Process</p>
-    <h2 class="section-title reveal" style="text-align: center;">How we <em>work.</em></h2>
-  </div>
-
-  <div class="process-steps">
-    <div class="process-step reveal">
-      <div class="step-dot">I</div>
-      <div class="step-name">Initial Meeting</div>
-      <p class="step-text">A confidential conversation to understand your investment objectives, time horizon, and risk appetite.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-dot">II</div>
-      <div class="step-name">Due Diligence</div>
-      <p class="step-text">We share our track record, strategy documentation, and risk disclosures in full transparency.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-dot">III</div>
-      <div class="step-name">Onboarding</div>
-      <p class="step-text">Structured legal agreements, managed account setup, and a dedicated relationship manager assigned.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-dot">IV</div>
-      <div class="step-name">Active Management</div>
-      <p class="step-text">Monthly reporting, quarterly reviews, and full account transparency through our investor portal.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TRACK RECORD SECTION -->
-<section style="padding: 130px 60px; background: var(--off-black);" id="track-record">
-
-  <p class="section-tag">Track Record</p>
-  <h2 class="section-title">Performance built on<br><em>verified discipline.</em></h2>
-
-  <!-- STATS ROW -->
-  <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:rgba(201,169,110,0.1); margin-bottom:48px;">
-    <div style="background:var(--off-black); padding:28px 24px;">
-      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Total Return (YTD)</div>
-      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:#6fcf97; line-height:1;"><em>+31.4%</em></div>
-    </div>
-    <div style="background:var(--off-black); padding:28px 24px;">
-      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Win Rate</div>
-      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:var(--white); line-height:1;"><em>68</em><span style="font-size:22px; color:var(--gold-dim)">%</span></div>
-    </div>
-    <div style="background:var(--off-black); padding:28px 24px;">
-      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Avg Risk:Reward</div>
-      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:var(--white); line-height:1;"><em>1</em><span style="font-size:22px; color:var(--gold-dim)">:</span><em>2.4</em></div>
-    </div>
-    <div style="background:var(--off-black); padding:28px 24px;">
-      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Max Drawdown</div>
-      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:#eb5757; line-height:1;"><em>−6.2%</em></div>
-    </div>
-    <div style="background:var(--off-black); padding:28px 24px;">
-      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px;">Total Trades</div>
-      <div style="font-family:var(--serif); font-size:38px; font-weight:300; color:var(--white); line-height:1;"><em>184</em></div>
-    </div>
-  </div>
-
-  <!-- FILTER BUTTONS -->
-  <div style="display:flex; gap:8px; margin-bottom:20px;">
-    <button class="tr-filter active" onclick="trSetFilter('all',this)">All time</button>
-    <button class="tr-filter" onclick="trSetFilter('6m',this)">6 months</button>
-    <button class="tr-filter" onclick="trSetFilter('3m',this)">3 months</button>
-    <button class="tr-filter" onclick="trSetFilter('1m',this)">1 month</button>
-  </div>
-
-  <!-- EQUITY CURVE + PAIR BREAKDOWN -->
-  <div style="display:grid; grid-template-columns:2fr 1fr; gap:2px; background:rgba(201,169,110,0.1); margin-bottom:2px;">
-    <div style="background:var(--off-black); padding:32px;">
-      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:24px;">Equity curve</div>
-      <div style="position:relative; width:100%; height:200px;">
-        <canvas id="tr-equityChart" role="img" aria-label="Equity curve showing portfolio growth of 31.4% over 12 months">Portfolio grew from 100% to 131.4% across 12 months.</canvas>
-      </div>
-    </div>
-    <div style="background:var(--off-black); padding:32px;">
-      <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:24px;">P&amp;L by pair</div>
-      <div id="tr-pairBars" style="display:flex; flex-direction:column; gap:12px;"></div>
-    </div>
-  </div>
-
-  <!-- MONTHLY HEATMAP -->
-  <div style="background:var(--off-black); padding:32px; margin-bottom:2px;">
-    <div style="font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:24px;">Monthly returns</div>
-    <div id="tr-heatmap" style="display:grid; grid-template-columns:repeat(12,1fr); gap:3px;"></div>
-  </div>
-
-  <!-- TRADE LOG -->
-  <div style="background:var(--off-black);">
-    <div style="display:grid; grid-template-columns:100px 90px 70px 70px 70px 70px 1fr; padding:14px 32px; border-bottom:1px solid rgba(201,169,110,0.1);">
-      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Date</div>
-      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Pair</div>
-      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Dir</div>
-      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Entry</div>
-      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Exit</div>
-      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">P&amp;L (R)</div>
-      <div style="font-size:8px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">Strategy</div>
-    </div>
-    <div id="tr-tradeLog"></div>
-    <div style="padding:20px 32px; background:rgba(201,169,110,0.04); border-top:1px solid rgba(201,169,110,0.1); display:flex; align-items:center; gap:12px;">
-      <div style="width:6px; height:6px; border-radius:50%; background:var(--gold-dim); flex-shrink:0;"></div>
-      <div style="font-size:10px; font-weight:300; color:var(--gold-dim); letter-spacing:0.05em;">
-        Placeholder data — replace <code style="font-family:monospace; color:var(--gold); background:rgba(201,169,110,0.1); padding:2px 6px; border-radius:2px; font-size:9px;">trFetchTrades()</code> with your Notion API endpoint to go live.
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- TRACK RECORD STYLES -->
-<style>
-  .tr-filter {
-    font-family: var(--sans);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border: 1px solid rgba(201,169,110,0.2);
-    background: transparent;
-    color: var(--white-dim);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .tr-filter.active, .tr-filter:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-  .tr-log-row {
-    display: grid;
-    grid-template-columns: 100px 90px 70px 70px 70px 70px 1fr;
-    padding: 14px 32px;
-    border-bottom: 1px solid rgba(201,169,110,0.06);
-    transition: background 0.15s;
-    cursor: default;
-  }
-  .tr-log-row:hover { background: rgba(201,169,110,0.03); }
-  .tr-log-cell {
-    font-size: 11px;
-    font-weight: 300;
-    color: var(--white-dim);
-    display: flex;
-    align-items: center;
-  }
-  .tr-log-cell.pair { font-weight: 500; color: var(--white); letter-spacing: 0.05em; }
-  .tr-log-cell.pos  { color: #6fcf97; font-weight: 500; }
-  .tr-log-cell.neg  { color: #eb5757; font-weight: 500; }
-  .tr-badge-dir {
-    font-size: 8px; font-weight: 500; letter-spacing: 0.1em;
-    text-transform: uppercase; padding: 3px 8px; border-radius: 2px;
-  }
-  .tr-badge-strat {
-    font-size: 8px; font-weight: 500; letter-spacing: 0.08em;
-    padding: 3px 8px; border-radius: 2px;
-    background: rgba(201,169,110,0.1); color: var(--gold);
-  }
-</style>
-
-<!-- TRACK RECORD SCRIPTS -->
-<script>
-(function() {
-
-  /* ── DATA ─────────────────────────────────────────────────────────────────
-     Replace trFetchTrades() with fetch('YOUR_NOTION_PROXY_URL').then(r=>r.json())
-     Each trade: { date, pair, direction, entry, exit, pnl_r, strategy }
-  ───────────────────────────────────────────────────────────────────────── */
-  function trFetchTrades() {
-    return [
-      { date:'2024-10-28', pair:'GBP/USD', direction:'long',  entry:'1.2980', exit:'1.3041', pnl_r:+2.1, strategy:'Trend Continuation' },
-      { date:'2024-10-24', pair:'EUR/USD', direction:'short', entry:'1.0892', exit:'1.0861', pnl_r:+1.6, strategy:'Mean Reversion' },
-      { date:'2024-10-21', pair:'USD/JPY', direction:'long',  entry:'149.40', exit:'149.12', pnl_r:-1.0, strategy:'Breakout' },
-      { date:'2024-10-17', pair:'GOLD',    direction:'long',  entry:'2371.0', exit:'2398.5', pnl_r:+2.8, strategy:'Macro Alignment' },
-      { date:'2024-10-14', pair:'AUD/USD', direction:'short', entry:'0.6580', exit:'0.6561', pnl_r:+0.9, strategy:'Mean Reversion' },
-      { date:'2024-10-10', pair:'EUR/GBP', direction:'long',  entry:'0.8590', exit:'0.8612', pnl_r:+1.4, strategy:'Trend Continuation' },
-      { date:'2024-10-07', pair:'USD/CHF', direction:'short', entry:'0.9041', exit:'0.9068', pnl_r:-1.0, strategy:'Breakout' },
-      { date:'2024-10-03', pair:'GBP/JPY', direction:'long',  entry:'193.80', exit:'194.92', pnl_r:+3.2, strategy:'Macro Alignment' },
-    ];
-  }
-
-  const trMonthly = [
-    { m:'JAN', r:+4.1 }, { m:'FEB', r:+2.8 }, { m:'MAR', r:-1.4 },
-    { m:'APR', r:+5.2 }, { m:'MAY', r:+3.7 }, { m:'JUN', r:-0.8 },
-    { m:'JUL', r:+4.9 }, { m:'AUG', r:+2.1 }, { m:'SEP', r:+1.6 },
-    { m:'OCT', r:+6.3 }, { m:'NOV', r:+3.2 }, { m:'DEC', r:+0.0 },
-  ];
-
-  const trPairs = [
-    { name:'GOLD',    pnl:+8.4 },
-    { name:'GBP/USD', pnl:+6.9 },
-    { name:'EUR/USD', pnl:+5.2 },
-    { name:'GBP/JPY', pnl:+4.1 },
-    { name:'USD/JPY', pnl:+3.8 },
-    { name:'AUD/USD', pnl:+2.3 },
-    { name:'USD/CHF', pnl:-1.3 },
-  ];
-
-  const trDatasets = {
-    all: { labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Now'], data:[100,102.1,104.8,103.5,107.9,111.4,110.7,114.9,116.8,118.2,122.9,125.8,131.4] },
-    '6m': { labels:['May','Jun','Jul','Aug','Sep','Oct','Now'],  data:[110.7,114.9,116.8,118.2,122.9,125.8,131.4] },
-    '3m': { labels:['Aug','Sep','Oct','Now'],                    data:[116.8,118.2,122.9,125.8,131.4] },
-    '1m': { labels:['Oct W1','Oct W2','Oct W3','Oct W4','Now'],  data:[122.9,124.1,125.8,129.0,131.4] },
-  };
-
-  let trChart;
-
-  function trBuildChart(key) {
-    const { labels, data } = trDatasets[key];
-    const ctx = document.getElementById('tr-equityChart').getContext('2d');
-    if (trChart) trChart.destroy();
-    trChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [{
-          data,
-          borderColor: '#c9a96e',
-          borderWidth: 1.5,
-          pointRadius: 0,
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: '#c9a96e',
-          tension: 0.4,
-          fill: true,
-          backgroundColor: (ctx2) => {
-            const g = ctx2.chart.ctx.createLinearGradient(0,0,0,200);
-            g.addColorStop(0,'rgba(201,169,110,0.15)');
-            g.addColorStop(1,'rgba(201,169,110,0)');
-            return g;
-          }
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1a1a1a', borderColor: '#8a7050', borderWidth: 0.5,
-            titleColor: '#d4d0c8', bodyColor: '#c9a96e',
-            callbacks: { label: (c) => ' ' + c.parsed.y.toFixed(1) + '%' }
-          }
-        },
-        scales: {
-          x: { grid: { color:'rgba(201,169,110,0.06)' }, ticks: { color:'#8a7050', font:{ family:'Montserrat', size:9 }, maxRotation:0 } },
-          y: { grid: { color:'rgba(201,169,110,0.06)' }, ticks: { color:'#8a7050', font:{ family:'Montserrat', size:9 }, callback: v => v.toFixed(0)+'%' }, min: 95 }
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inderson Investment Group | Precision Capital Allocation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#e1e2e8",
+                        "surface-charcoal": "#111111",
+                        "on-primary-fixed": "#261900",
+                        "on-tertiary-container": "#41413e",
+                        "error": "#ffb4ab",
+                        "success-emerald": "#2E7D32",
+                        "precision-gold": "#C9A96E",
+                        "on-secondary-fixed-variant": "#44474b",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-fixed": "#e4e2de",
+                        "on-tertiary": "#30312e",
+                        "alpha-amber": "#E2B15B",
+                        "surface-container": "#201f1f",
+                        "on-primary-fixed-variant": "#5a4312",
+                        "primary-fixed": "#ffdea4",
+                        "on-secondary-container": "#b6b8be",
+                        "on-primary-container": "#543d0c",
+                        "inverse-on-surface": "#313030",
+                        "surface-bright": "#3a3939",
+                        "on-background": "#e5e2e1",
+                        "slate-gray": "#D4D0C8",
+                        "tertiary-container": "#aeadaa",
+                        "on-tertiary-fixed": "#1b1c1a",
+                        "secondary-fixed-dim": "#c5c6cc",
+                        "outline-variant": "#4d463a",
+                        "outline": "#998f81",
+                        "on-secondary": "#2e3135",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#191c20",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed-dim": "#c8c6c3",
+                        "surface-variant": "#353534",
+                        "primary-fixed-dim": "#e4c285",
+                        "on-tertiary-fixed-variant": "#474744",
+                        "primary-container": "#c9a96e",
+                        "surface-container-lowest": "#0e0e0e",
+                        "error-container": "#93000a",
+                        "surface": "#131313",
+                        "primary": "#e6c487",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-container": "#46494e",
+                        "risk-crimson": "#D32F2F",
+                        "inverse-primary": "#745a27",
+                        "on-primary": "#412d00",
+                        "surface-tint": "#e4c285",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary": "#c5c6cc",
+                        "on-surface-variant": "#d0c5b5",
+                        "tertiary": "#cac8c5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "gutter": "32px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "section-padding": "120px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "stat-lg": ["EB Garamond"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["EB Garamond"],
+                        "display-lg": ["EB Garamond"],
+                        "headline-md": ["EB Garamond"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["EB Garamond"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "stat-lg": ["40px", {"lineHeight": "1", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}]
+                    }
+                }
+            }
         }
-      }
-    });
-  }
+    </script>
 
-  window.trSetFilter = function(key, btn) {
-    document.querySelectorAll('.tr-filter').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    trBuildChart(key);
-  };
+</head>
+<body class="font-body-md bg-background selection:bg-precision-gold selection:text-surface-charcoal">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-charcoal/80 backdrop-blur-xl border-b border-slate-gray/10">
+<div class="max-w-container-max mx-auto px-gutter py-6 flex justify-between items-center">
+<div class="text-headline-md font-headline-md font-bold text-on-surface uppercase tracking-wider">
+                Inderson <span class="text-precision-gold">Investment</span> Group
+            </div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-label-md font-label-md text-precision-gold font-bold border-b border-precision-gold pb-1 transition-colors duration-300" href="#">About</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-precision-gold transition-colors duration-300" href="#">Strategy</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-precision-gold transition-colors duration-300" href="#">Process</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-precision-gold transition-colors duration-300" href="#">Contact</a>
+</div>
+<button class="px-6 py-2 bg-precision-gold text-surface-charcoal font-bold text-label-md transition-transform scale-95 active:scale-90">
+                Investor Relations
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-32 overflow-hidden">
+<div class="absolute inset-0 z-0">
 
-  function trBuildHeatmap() {
-    const el = document.getElementById('tr-heatmap');
-    const max = Math.max(...trMonthly.map(d => Math.abs(d.r)));
-    trMonthly.forEach(d => {
-      const pct = Math.abs(d.r) / max;
-      let bg, textColor;
-      if (d.r === 0) { bg = 'rgba(201,169,110,0.05)'; textColor = '#8a7050'; }
-      else if (d.r > 0) {
-        bg = `rgba(111,207,151,${(0.15 + pct * 0.7).toFixed(2)})`;
-        textColor = d.r > 3 ? '#0a2e1a' : '#1a4a2a';
-      } else {
-        bg = `rgba(235,87,87,${(0.15 + pct * 0.7).toFixed(2)})`;
-        textColor = '#3a0a0a';
-      }
-      const sign = d.r > 0 ? '+' : '';
-      const cell = document.createElement('div');
-      cell.style.cssText = 'text-align:center;';
-      cell.innerHTML = `
-        <div style="font-size:8px; letter-spacing:0.1em; color:#8a7050; margin-bottom:4px; text-transform:uppercase;">${d.m}</div>
-        <div style="height:40px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:500; background:${bg}; color:${textColor}; cursor:default;">
-          ${d.r === 0 ? '—' : sign + d.r.toFixed(1) + '%'}
-        </div>`;
-      el.appendChild(cell);
-    });
-  }
-
-  function trBuildPairs() {
-    const el = document.getElementById('tr-pairBars');
-    const max = Math.max(...trPairs.map(d => Math.abs(d.pnl)));
-    trPairs.forEach(d => {
-      const pct = (Math.abs(d.pnl) / max * 100).toFixed(1);
-      const color = d.pnl >= 0 ? '#6fcf97' : '#eb5757';
-      const sign = d.pnl >= 0 ? '+' : '';
-      const row = document.createElement('div');
-      row.style.cssText = 'display:flex; flex-direction:column; gap:4px;';
-      row.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-size:10px; font-weight:500; letter-spacing:0.05em; color:#f5f3ef;">${d.name}</span>
-          <span style="font-size:10px; font-weight:500; color:${color};">${sign}${d.pnl.toFixed(1)}R</span>
-        </div>
-        <div style="height:4px; background:rgba(201,169,110,0.1); border-radius:2px; overflow:hidden;">
-          <div style="height:100%; border-radius:2px; width:${pct}%; background:${color}; opacity:0.7;"></div>
-        </div>`;
-      el.appendChild(row);
-    });
-  }
-
-  function trBuildLog() {
-    const trades = trFetchTrades();
-    const el = document.getElementById('tr-tradeLog');
-    trades.forEach(t => {
-      const pos = t.pnl_r >= 0;
-      const sign = pos ? '+' : '';
-      const dirBg = t.direction === 'long' ? 'rgba(111,207,151,0.12)' : 'rgba(235,87,87,0.12)';
-      const dirColor = t.direction === 'long' ? '#6fcf97' : '#eb5757';
-      const row = document.createElement('div');
-      row.className = 'tr-log-row';
-      row.innerHTML = `
-        <div class="tr-log-cell">${t.date}</div>
-        <div class="tr-log-cell pair">${t.pair}</div>
-        <div class="tr-log-cell"><span class="tr-badge-dir" style="background:${dirBg}; color:${dirColor};">${t.direction.toUpperCase()}</span></div>
-        <div class="tr-log-cell">${t.entry}</div>
-        <div class="tr-log-cell">${t.exit}</div>
-        <div class="tr-log-cell ${pos?'pos':'neg'}">${sign}${t.pnl_r.toFixed(1)}R</div>
-        <div class="tr-log-cell"><span class="tr-badge-strat">${t.strategy}</span></div>`;
-      el.appendChild(row);
-    });
-  }
-
-  trBuildChart('all');
-  trBuildHeatmap();
-  trBuildPairs();
-  trBuildLog();
-
-})();
-</script>
-
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="cta-bg-geo">
-    <svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="300" y="20" width="388" height="388" rx="2" transform="rotate(45 300 20)" fill="none" stroke="#c9a96e" stroke-width="1"/>
-      <rect x="300" y="80" width="300" height="300" rx="2" transform="rotate(45 300 80)" fill="none" stroke="#c9a96e" stroke-width="1"/>
-      <rect x="300" y="140" width="212" height="212" rx="2" transform="rotate(45 300 140)" fill="none" stroke="#c9a96e" stroke-width="1"/>
-      <rect x="300" y="200" width="130" height="130" rx="2" transform="rotate(45 300 200)" fill="none" stroke="#c9a96e" stroke-width="1"/>
-    </svg>
-  </div>
-  <p class="section-tag reveal" style="justify-content: center;">Investor Relations</p>
-  <h2 class="cta-title reveal">Begin a conversation<br>about your <em>capital.</em></h2>
-  <p class="cta-sub reveal">Qualified investors only. Minimum allocation thresholds apply.</p>
-  <div class="cta-actions reveal">
-    <a href="mailto:investors@indersongroup.com" class="btn-primary">Contact Our Team</a>
-    <a href="#about" class="btn-ghost">Learn More</a>
-  </div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-gutter grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-stack-lg">
+<div class="flex items-center gap-4 text-precision-gold">
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+<p class="font-label-md text-label-md uppercase tracking-[0.2em]">Forex · Futures · Alternative Assets</p>
+</div>
+<h1 class="font-display-lg text-display-lg leading-tight">
+                    Capital<br/>Allocated with<br/><span class="alpha-text">Precision.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Inderson Investment Group deploys investor capital across global forex and futures markets — driven by rigorous quantitative research and disciplined risk management.
+                </p>
+<div class="flex items-center gap-8 pt-4">
+<button class="px-8 py-4 bg-precision-gold text-surface-charcoal font-bold text-label-md hover:brightness-110 transition-all">
+                        EXPLORE OPPORTUNITIES
+                    </button>
+<button class="flex items-center gap-4 text-on-surface hover:text-precision-gold transition-colors group">
+<span class="text-label-md font-label-md uppercase tracking-widest">Our Approach</span>
+<span class="w-16 h-[1px] bg-on-surface-variant group-hover:bg-precision-gold transition-all duration-500"></span>
+</button>
+</div>
+</div>
+<div class="relative hidden lg:block">
+<div class="glass-panel p-8 aspect-[4/3] flex items-end">
+<div class="absolute top-0 right-0 p-8">
+<div class="flex items-center gap-2 text-success-emerald">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-headline-md text-headline-md">+31.4%</span>
+</div>
+<p class="text-label-md text-on-surface-variant text-right">Annual Alpha</p>
+</div>
+<div class="w-full h-full flex items-end gap-1 overflow-hidden">
+<!-- Chart Mockup -->
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[20%]" style="height: 30%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[25%]" style="height: 45%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[40%]" style="height: 35%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[55%]" style="height: 60%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[45%]" style="height: 50%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[70%]" style="height: 85%"></div>
+<div class="flex-1 bg-precision-gold/10 border-t border-precision-gold/30 h-[65%]" style="height: 70%"></div>
+<div class="flex-1 bg-precision-gold/20 border-t border-precision-gold h-[100%]" style="height: 95%"></div>
+</div>
+</div>
+<div class="absolute -bottom-8 -left-8 glass-panel p-6 w-64">
+<div class="flex justify-between items-center mb-4">
+<span class="text-label-md text-on-surface-variant">Live Terminal</span>
+<span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse"></span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-slate-gray">EUR/USD</span>
+<span class="text-success-emerald">1.0842</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-slate-gray">XAU/USD</span>
+<span class="text-success-emerald">2,388.40</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-slate-gray">SPX 500</span>
+<span class="text-success-emerald">5,214.25</span>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
+<!-- Ticker Section -->
+<div class="ticker-wrap py-4">
+<div class="ticker">
+<div class="flex gap-12 px-12 items-center">
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/JPY <span class="text-risk-crimson">149.82 -0.31%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">GOLD <span class="text-success-emerald">2,388.40 +0.52%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">CRUDE OIL <span class="text-risk-crimson">79.14 -0.19%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">S&amp;P 500 FUT <span class="text-success-emerald">5,214.25 +0.38%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">AUD/USD <span class="text-success-emerald">0.6548 +0.11%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/CHF <span class="text-risk-crimson">0.9012 -0.08%</span></span>
+</div>
+<!-- Duplicated for seamless loop -->
+<div class="flex gap-12 px-12 items-center">
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/JPY <span class="text-risk-crimson">149.82 -0.31%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">GOLD <span class="text-success-emerald">2,388.40 +0.52%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">CRUDE OIL <span class="text-risk-crimson">79.14 -0.19%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">S&amp;P 500 FUT <span class="text-success-emerald">5,214.25 +0.38%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">AUD/USD <span class="text-success-emerald">0.6548 +0.11%</span></span>
+<span class="text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">USD/CHF <span class="text-risk-crimson">0.9012 -0.08%</span></span>
+</div>
+</div>
+</div>
+<!-- Stats Section -->
+<section class="py-24 border-b border-slate-gray/10">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">$25K+</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Capital AUM</p>
+</div>
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">18%</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Avg. Annual Return</p>
+</div>
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">3+</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Years in Operation</p>
+</div>
+<div class="space-y-2 border-l border-slate-gray/20 pl-8">
+<p class="font-stat-lg text-stat-lg text-precision-gold">0.82</p>
+<p class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Sharpe Ratio (3Y)</p>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-section-padding">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid lg:grid-cols-2 gap-24">
+<div class="space-y-stack-lg">
+<div class="flex items-center gap-4 text-precision-gold">
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+<p class="font-label-md text-label-md uppercase tracking-widest">About</p>
+</div>
+<h2 class="font-headline-lg text-headline-lg">Where discipline meets <span class="alpha-text">opportunity.</span></h2>
+<div class="space-y-6 text-on-surface-variant">
+<p class="font-body-lg text-body-lg">Founded on a belief that markets reward preparation over intuition, Inderson Investment Group has built a systematic approach to trading forex and futures markets across global time zones.</p>
+<p class="font-body-lg text-body-lg">We combine proprietary algorithmic signals with seasoned discretionary oversight — ensuring our capital deployment is both data-driven and contextually aware of macro conditions.</p>
+</div>
+</div>
+<div class="grid gap-6">
+<div class="glass-panel p-8 group hover:bg-surface-charcoal transition-all duration-500">
+<h4 class="font-headline-md text-headline-md mb-4 flex items-center justify-between">
+                            Forex Markets
+                            <span class="material-symbols-outlined text-precision-gold opacity-0 group-hover:opacity-100 transition-opacity">currency_exchange</span>
+</h4>
+<p class="text-on-surface-variant font-body-md">Major, minor, and exotic currency pairs across London, New York, and Tokyo sessions. Specializing in momentum and mean-reversion strategies.</p>
+</div>
+<div class="glass-panel p-8 group hover:bg-surface-charcoal transition-all duration-500">
+<h4 class="font-headline-md text-headline-md mb-4 flex items-center justify-between">
+                            Futures Markets
+                            <span class="material-symbols-outlined text-precision-gold opacity-0 group-hover:opacity-100 transition-opacity">timeline</span>
+</h4>
+<p class="text-on-surface-variant font-body-md">Commodity, index, and interest rate futures. Positioned to benefit from both trending and ranging macro environments.</p>
+</div>
+<div class="glass-panel p-8 group hover:bg-surface-charcoal transition-all duration-500">
+<h4 class="font-headline-md text-headline-md mb-4 flex items-center justify-between">
+                            Risk Management
+                            <span class="material-symbols-outlined text-precision-gold opacity-0 group-hover:opacity-100 transition-opacity">shield</span>
+</h4>
+<p class="text-on-surface-variant font-body-md">Every position is governed by strict drawdown limits, position sizing protocols, and portfolio-level correlation controls.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Strategy Section (Pillars) -->
+<section class="py-section-padding bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center space-y-stack-md mb-24">
+<p class="font-label-md text-label-md text-precision-gold uppercase tracking-[0.3em]">Strategy</p>
+<h2 class="font-headline-lg text-headline-lg">Three pillars of <span class="alpha-text">sustainable alpha.</span></h2>
+</div>
+<div class="grid md:grid-cols-3 gap-1px bg-slate-gray/10">
+<div class="bg-surface-charcoal p-12 space-y-8">
+<p class="font-display-lg text-stat-lg text-slate-gray/20">01</p>
+<h3 class="font-headline-md text-headline-md text-precision-gold">Systematic Research</h3>
+<p class="text-on-surface-variant leading-relaxed">Quantitative models screen thousands of market conditions daily, identifying high-probability setups with asymmetric risk-reward profiles across correlated instruments.</p>
+</div>
+<div class="bg-surface-charcoal p-12 space-y-8">
+<p class="font-display-lg text-stat-lg text-slate-gray/20">02</p>
+<h3 class="font-headline-md text-headline-md text-precision-gold">Macro Alignment</h3>
+<p class="text-on-surface-variant leading-relaxed">All positions are filtered through a top-down macro framework — ensuring our trade thesis is consistent with broader central bank policy, liquidity cycles, and geopolitical flows.</p>
+</div>
+<div class="bg-surface-charcoal p-12 space-y-8">
+<p class="font-display-lg text-stat-lg text-slate-gray/20">03</p>
+<h3 class="font-headline-md text-headline-md text-precision-gold">Dynamic Risk Control</h3>
+<p class="text-on-surface-variant leading-relaxed">Volatility-adjusted position sizing, real-time drawdown monitoring, and portfolio heat mapping ensure capital preservation remains the foundation of every allocation decision.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Track Record Section -->
+<section class="py-section-padding">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex flex-col md:flex-row justify-between items-end gap-12 mb-24">
+<div class="space-y-stack-md">
+<p class="font-label-md text-label-md text-precision-gold uppercase tracking-widest">Track Record</p>
+<h2 class="font-headline-lg text-headline-lg">Performance built on<br/><span class="alpha-text">verified discipline.</span></h2>
+</div>
+<div class="flex gap-4 p-1 glass-panel">
+<button class="px-4 py-2 text-label-md bg-precision-gold text-surface-charcoal font-bold">ALL TIME</button>
+<button class="px-4 py-2 text-label-md text-on-surface-variant hover:text-on-surface transition-colors">6 MONTHS</button>
+<button class="px-4 py-2 text-label-md text-on-surface-variant hover:text-on-surface transition-colors">1 MONTH</button>
+</div>
+</div>
+<div class="grid lg:grid-cols-4 gap-8 mb-24">
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Total Return (YTD)</p>
+<p class="font-stat-lg text-stat-lg text-success-emerald">+31.4%</p>
+</div>
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Win Rate</p>
+<p class="font-stat-lg text-stat-lg text-on-surface">68%</p>
+</div>
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Avg Risk:Reward</p>
+<p class="font-stat-lg text-stat-lg text-on-surface">1:2.4</p>
+</div>
+<div class="glass-panel p-8 text-center">
+<p class="text-label-md text-on-surface-variant uppercase mb-4">Max Drawdown</p>
+<p class="font-stat-lg text-stat-lg text-risk-crimson">-6.2%</p>
+</div>
+</div>
+<div class="glass-panel p-1 border-slate-gray/10 mb-24">
+<div class="p-8 border-b border-slate-gray/10 flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md">Equity Curve Analysis</h4>
+<p class="text-label-md text-on-surface-variant">Portfolio grew from 100% to 131.4%</p>
+</div>
+<div class="h-96 w-full relative p-12">
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">
-    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="40" y="4" width="44" height="44" rx="1" transform="rotate(45 40 4)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
-      <rect x="40" y="14" width="32" height="32" rx="1" transform="rotate(45 40 14)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
-      <rect x="40" y="24" width="20" height="20" rx="1" transform="rotate(45 40 24)" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
-    </svg>
-    <div class="nav-logo-text">
-      <span class="nav-logo-name" style="font-size:11px;">INDERSON</span>
-      <span class="nav-logo-sub" style="font-size:7px;">INVESTMENT GROUP</span>
-    </div>
-  </div>
-  <p class="footer-legal">
-    &copy; 2024 Inderson Investment Group. All rights reserved. Trading in forex and futures markets involves substantial risk of loss. Past performance is not indicative of future results. This page does not constitute an offer or solicitation to invest.
-  </p>
+<!-- Chart Lines -->
+<div class="absolute inset-0 p-12 flex items-end">
+<svg class="w-full h-full stroke-precision-gold fill-none" viewbox="0 0 1000 400">
+<path d="M0 350 Q 100 340 200 320 T 400 280 T 600 200 T 800 150 T 1000 50" stroke-width="3"></path>
+<path d="M0 350 Q 100 340 200 320 T 400 280 T 600 200 T 800 150 T 1000 50 L 1000 400 L 0 400 Z" fill="url(#grad1)" opacity="0.1"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color: #C9A96E; stop-opacity: 1"></stop>
+<stop offset="100%" style="stop-color: #C9A96E; stop-opacity: 0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+<!-- Trade History Table -->
+<div class="overflow-x-auto glass-panel">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-slate-gray/10">
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Date</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Pair</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Dir</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Entry</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Exit</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">P&amp;L (R)</th>
+<th class="px-8 py-4 font-label-md text-label-md text-slate-gray uppercase">Strategy</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-gray/5">
+<tr class="hover:bg-surface-charcoal/50 transition-colors">
+<td class="px-8 py-6 text-on-surface">2024-10-28</td>
+<td class="px-8 py-6 font-bold text-precision-gold">GBP/USD</td>
+<td class="px-8 py-6"><span class="text-risk-crimson">SHORT</span></td>
+<td class="px-8 py-6">1.2580</td>
+<td class="px-8 py-6">1.3041</td>
+<td class="px-8 py-6 text-success-emerald">+2.1R</td>
+<td class="px-8 py-6 italic text-on-surface-variant">Trend Continuation</td>
+</tr>
+<tr class="hover:bg-surface-charcoal/50 transition-colors">
+<td class="px-8 py-6 text-on-surface">2024-10-24</td>
+<td class="px-8 py-6 font-bold text-precision-gold">EUR/USD</td>
+<td class="px-8 py-6"><span class="text-risk-crimson">SHORT</span></td>
+<td class="px-8 py-6">1.0892</td>
+<td class="px-8 py-6">1.0861</td>
+<td class="px-8 py-6 text-success-emerald">+1.6R</td>
+<td class="px-8 py-6 italic text-on-surface-variant">Mean Reversion</td>
+</tr>
+<tr class="hover:bg-surface-charcoal/50 transition-colors">
+<td class="px-8 py-6 text-on-surface">2024-10-21</td>
+<td class="px-8 py-6 font-bold text-precision-gold">USD/JPY</td>
+<td class="px-8 py-6"><span class="text-success-emerald">LONG</span></td>
+<td class="px-8 py-6">149.40</td>
+<td class="px-8 py-6">149.12</td>
+<td class="px-8 py-6 text-risk-crimson">-1.0R</td>
+<td class="px-8 py-6 italic text-on-surface-variant">Breakout</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-section-padding relative overflow-hidden">
+<div class="absolute inset-0 z-0">
+
+</div>
+<div class="relative z-10 max-w-4xl mx-auto text-center px-gutter space-y-stack-lg">
+<div class="flex items-center justify-center gap-4 text-precision-gold">
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+<p class="font-label-md text-label-md uppercase tracking-[0.4em]">Investor Relations</p>
+<span class="w-12 h-[1px] bg-precision-gold"></span>
+</div>
+<h2 class="font-headline-lg text-headline-lg">Begin a conversation<br/>about your <span class="alpha-text">capital.</span></h2>
+<p class="text-on-surface-variant font-body-lg">Qualified investors only. Minimum allocation thresholds apply. Direct access to portfolio managers and institutional transparency.</p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-8 pt-8">
+<button class="w-full md:w-auto px-12 py-5 bg-precision-gold text-surface-charcoal font-bold text-label-md hover:scale-105 transition-transform">
+                    CONTACT OUR TEAM
+                </button>
+<button class="flex items-center gap-4 text-on-surface hover:text-precision-gold transition-colors group">
+<span class="text-label-md font-label-md uppercase tracking-widest">Learn More</span>
+<span class="w-24 h-[1px] bg-slate-gray/30 group-hover:bg-precision-gold transition-all duration-700"></span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-slate-gray/10">
+<div class="max-w-container-max mx-auto px-gutter py-section-padding flex flex-col md:flex-row justify-between items-start gap-stack-md">
+<div class="max-w-md space-y-8">
+<div class="text-body-lg font-headline-md text-on-surface uppercase font-bold tracking-wider">
+                    Inderson <span class="text-precision-gold">Investment</span> Group
+                </div>
+<p class="text-body-md font-body-md text-on-surface-variant opacity-80 leading-loose">
+                    © 2024 Inderson Investment Group. All rights reserved. Trading in forex and futures markets involves substantial risk of loss. Past performance is not indicative of future results. This page does not constitute an offer or solicitation to invest.
+                </p>
+</div>
+<div class="flex flex-col md:items-end gap-12">
+<div class="flex gap-8">
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-precision-gold transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-precision-gold transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-precision-gold transition-colors duration-200" href="#">Risk Disclosure</a>
+</div>
+<div class="text-on-surface-variant flex items-center gap-4">
+<span class="material-symbols-outlined text-precision-gold">language</span>
+<span class="text-label-md uppercase tracking-widest">Global Markets HQ</span>
+</div>
+</div>
+</div>
 </footer>
-
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+        // Simple intersection observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>
