@@ -1,18 +1,50 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Inderson Investment Group | Precision Capital Allocation</title>
-  <link rel="stylesheet" href="./index.css?v=6">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script>
-  tailwind = {
-    config: {
+<html class="dark" lang="en">
+  
+ <head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Inderson Investment Group | Precision Capital Allocation
+  </title>
+
+  <!-- Google Fonts -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Material Symbols -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind configuration -->
+  <script>
+    tailwind.config = {
       darkMode: "class",
+
       theme: {
         extend: {
           colors: {
@@ -26,6 +58,7 @@
             "risk-crimson": "#D32F2F",
             "background": "#131313"
           },
+
           spacing: {
             "container-max": "1280px",
             "stack-md": "16px",
@@ -35,6 +68,7 @@
             "stack-sm": "8px",
             "section-padding": "120px"
           },
+
           fontFamily: {
             "label-md": ["Inter", "sans-serif"],
             "stat-lg": ["EB Garamond", "serif"],
@@ -45,22 +79,76 @@
             "body-md": ["Inter", "sans-serif"],
             "headline-lg": ["EB Garamond", "serif"]
           },
+
           fontSize: {
-            "label-md": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }],
-            "stat-lg": ["40px", { lineHeight: "1", fontWeight: "400" }],
-            "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
-            "display-lg": ["72px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "400" }],
-            "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "400" }],
-            "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-            "headline-lg": ["48px", { lineHeight: "1.2", fontWeight: "400" }]
+            "label-md": [
+              "12px",
+              {
+                lineHeight: "1",
+                letterSpacing: "0.1em",
+                fontWeight: "600"
+              }
+            ],
+
+            "stat-lg": [
+              "40px",
+              {
+                lineHeight: "1",
+                fontWeight: "400"
+              }
+            ],
+
+            "body-lg": [
+              "18px",
+              {
+                lineHeight: "1.6",
+                fontWeight: "400"
+              }
+            ],
+
+            "display-lg": [
+              "72px",
+              {
+                lineHeight: "1.1",
+                letterSpacing: "-0.02em",
+                fontWeight: "400"
+              }
+            ],
+
+            "headline-md": [
+              "32px",
+              {
+                lineHeight: "1.3",
+                fontWeight: "400"
+              }
+            ],
+
+            "body-md": [
+              "16px",
+              {
+                lineHeight: "1.6",
+                fontWeight: "400"
+              }
+            ],
+
+            "headline-lg": [
+              "48px",
+              {
+                lineHeight: "1.2",
+                fontWeight: "400"
+              }
+            ]
           }
         }
       }
-    }
-  };
-</script>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link rel="stylesheet" href="./index.css?v=5"/>
+    };
+  </script>
+
+  <!-- Load custom CSS once, after Tailwind -->
+  <link
+    rel="stylesheet"
+    href="./index.css?v=7"
+  >
 </head>
 <body class="font-body-md bg-background selection:bg-precision-gold selection:text-surface-charcoal">
 <!-- TopNavBar -->
