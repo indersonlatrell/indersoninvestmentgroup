@@ -25,9 +25,9 @@
     "statusDetail": "1 trade logged · disciplined · floor unlocked"
   },
   "payout": {
-    "target": 1350,
+    "target": 2000,
     "currentProfit": -125,
-    "toGo": 1475,
+    "toGo": 2125,
     "progressPct": 0,
     "split": "80% trader / 20% firm",
     "minPayout": 250,
