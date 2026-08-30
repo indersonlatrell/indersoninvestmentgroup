@@ -1,0 +1,80 @@
+{
+  "client": { "name": "Wesley Blanca", "slug": "wesley-blanca", "since": "2026-08-28" },
+  "manager": "Inderson Investment Group",
+  "firm": "MyFundedFutures",
+  "plan": "Builder Plan 25K",
+  "stage": "Sim Funded",
+  "login": "MFFUSFBLDR111140017",
+  "currency": "USD",
+  "updated": "2026-08-30T15:22:00Z",
+  "account": {
+    "startingBalance": 25000,
+    "balance": 24875,
+    "netPnl": -125,
+    "netPnlPct": -0.5,
+    "breachFloor": 24000,
+    "distanceToBreach": 875,
+    "maxDrawdown": 1000,
+    "drawdownUsed": 125,
+    "bufferRemainingPct": 87.5,
+    "eodHigh": 25000,
+    "floorLocked": false,
+    "lockAtEodHigh": 26100,
+    "lockedFloor": 25100,
+    "status": "Active",
+    "statusDetail": "1 trade logged · disciplined · floor unlocked"
+  },
+  "payout": {
+    "target": 1350,
+    "currentProfit": -125,
+    "toGo": 1475,
+    "progressPct": 0,
+    "split": "80% trader / 20% firm",
+    "minPayout": 250,
+    "maxPerCycle": 1000,
+    "buffer": 1100,
+    "promotionAfter": 5,
+    "eligible": false
+  },
+  "consistency": {
+    "rulePct": 50,
+    "status": "Not yet applicable — no profitable days yet",
+    "largestDayPct": null,
+    "pass": true
+  },
+  "stats": { "trades": 1, "wins": 0, "losses": 1, "winRatePct": 0, "disciplinedTrades": 1 },
+  "equityCurve": [
+    { "date": "2026-08-28", "label": "Account start", "equity": 25000 },
+    { "date": "2026-08-28", "label": "Trade № 1", "equity": 24875 }
+  ],
+  "trades": [
+    {
+      "n": 1,
+      "date": "2026-08-28T23:40:00Z",
+      "pair": "NQ",
+      "position": "Long",
+      "session": "London",
+      "setup": "IRL → ERL",
+      "result": "Loss",
+      "pnl": -125,
+      "disciplined": true,
+      "commentary": "Single planned London entry. Stopped out; discipline held — one trade, no revenge trading."
+    }
+  ],
+  "rules": {
+    "startingBalance": 25000,
+    "maxDrawdown": 1000,
+    "drawdownType": "End-of-day trailing",
+    "drawdownDetail": "The loss limit trails up only on new end-of-day equity highs and never moves down. It locks permanently at $25,100 (→ $100 of profit protected) once an end-of-day high of $26,100 is reached.",
+    "dailyLossLimit": "None",
+    "minTradingDays": 1,
+    "consistencyRule": "50% — the single largest winning day must be ≤ 50% of total profit (applies to payouts only)",
+    "profitSplit": "80% trader / 20% firm",
+    "firstPayout": "$250 above the $1,100 buffer → $1,350 total net profit",
+    "minPayout": 250,
+    "maxPayoutPerCycle": 1000,
+    "promotion": "Promotion to a live account after the 5th approved sim payout",
+    "contracts": "Max 2 minis / 20 micros",
+    "newsTrading": "Unrestricted"
+  }
+}
