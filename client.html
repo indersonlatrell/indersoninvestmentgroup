@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INDERSON INVESTMENT GROUP | Client Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "precision-gold": "#C9A96E", "alpha-amber": "#E2B15B",
+        "risk-crimson": "#D32F2F", "success-emerald": "#2E7D32",
+        "slate-gray": "#D4D0C8", "surface-charcoal": "#111111",
+        "surface": "#131313", "on-surface": "#e5e2e1",
+        "on-surface-variant": "#d0c5b5",
+        "surface-container-high": "#2a2a2a", "primary-fixed-dim": "#e4c285",
+        "on-primary": "#412d00"
+      },
+      fontFamily: {
+        "label-md": ["Inter"], "body-md": ["Inter"], "body-lg": ["Inter"],
+        "headline-md": ["EB Garamond"], "headline-lg": ["EB Garamond"],
+        "stat-lg": ["EB Garamond"], "display-lg": ["EB Garamond"]
+      },
+      fontSize: {
+        "label-md": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }],
+        "body-md": ["16px", { lineHeight: "1.6" }], "body-lg": ["18px", { lineHeight: "1.6" }],
+        "headline-md": ["30px", { lineHeight: "1.3" }], "headline-lg": ["44px", { lineHeight: "1.2" }],
+        "stat-lg": ["40px", { lineHeight: "1" }], "display-lg": ["64px", { lineHeight: "1.05", letterSpacing: "-0.02em" }]
+      }
+    } }
+  };
+</script>
+<style>
+  body { background-color:#0A0A0A; color:#e5e2e1; overflow-x:hidden; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; }
+  .glass-card { background:rgba(17,17,17,0.85); backdrop-filter:blur(12px); border:1px solid rgba(212,208,200,0.10); }
+  .fade-in { animation:fadeIn .6s ease-out forwards; opacity:0; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px);} to { opacity:1; transform:translateY(0);} }
+  .tabnum { font-variant-numeric:tabular-nums; }
+</style>
+</head>
+<body class="font-body-md text-on-surface min-h-screen">
+
+<div class="fixed inset-0 z-[-1] overflow-hidden">
+  <div class="absolute inset-0 bg-[#0A0A0A]"></div>
+  <div class="absolute -top-40 -right-40 w-[520px] h-[520px] rounded-full bg-precision-gold/[0.06] blur-[120px]"></div>
+  <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-precision-gold/[0.04] blur-[120px]"></div>
+</div>
+
+<header class="sticky top-0 z-50 bg-surface-charcoal/80 backdrop-blur-xl border-b border-slate-gray/10">
+  <div class="flex justify-between items-center px-5 md:px-8 py-4 max-w-[1180px] mx-auto">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-precision-gold">shield_person</span>
+      <div class="leading-tight">
+        <span class="block font-headline-md text-[20px] text-precision-gold tracking-tight">INDERSON INVESTMENT GROUP</span>
+        <span class="block font-label-md text-[10px] text-slate-gray/50 uppercase tracking-[0.2em]">Client Portal</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="hidden sm:flex flex-col items-end leading-tight">
+        <span id="hdr-name" class="font-label-md text-label-md text-on-surface">—</span>
+        <span class="font-label-md text-[10px] text-slate-gray/40 uppercase tracking-widest">Managed Account</span>
+      </div>
+      <button id="logout" class="flex items-center gap-2 px-3 py-2 border border-slate-gray/15 text-slate-gray/70 hover:text-on-surface hover:border-precision-gold/30 transition-colors font-label-md text-label-md">
+        <span class="material-symbols-outlined text-[18px]">logout</span><span class="hidden sm:inline">Sign out</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1180px] mx-auto px-5 md:px-8 py-8 md:py-12" id="app" style="display:none">
+
+  <section class="fade-in mb-8">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4">
+      <div>
+        <p class="font-label-md text-label-md text-precision-gold uppercase tracking-[0.25em] mb-2">Managed Futures Account</p>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface" id="acct-title">—</h1>
+        <p class="font-body-md text-slate-gray/50 mt-1">
+          Account <span id="acct-login" class="tabnum">—</span> · Managed by Inderson Investment Group
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="status-pill" class="inline-flex items-center gap-2 px-4 py-2 border font-label-md text-label-md uppercase tracking-widest">
+          <span class="w-2 h-2 rounded-full"></span><span id="status-text">—</span>
+        </span>
+      </div>
+    </div>
+    <p class="font-label-md text-[11px] text-slate-gray/40 mt-4 flex items-center gap-2">
+      <span class="material-symbols-outlined text-[15px]">update</span>
+      Last updated <span id="updated">—</span> · figures sourced from the account's live trade journal
+    </p>
+  </section>
+
+  <section class="fade-in grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6">
+    <div class="glass-card p-6">
+      <span class="font-label-md text-label-md text-slate-gray/60 uppercase tracking-widest">Account Value</span>
+      <div class="mt-3 font-stat-lg text-stat-lg text-on-surface tabnum" id="kpi-balance">—</div>
+      <div class="mt-2 font-label-md text-[11px] text-slate-gray/40">Starting balance <span id="kpi-start" class="tabnum">—</span></div>
+    </div>
+    <div class="glass-card p-6">
+      <span class="font-label-md text-label-md text-slate-gray/60 uppercase tracking-widest">Net Profit / Loss</span>
+      <div class="mt-3 flex items-baseline gap-2">
+        <span class="font-stat-lg text-stat-lg tabnum" id="kpi-pnl">—</span>
+        <span class="material-symbols-outlined" id="kpi-pnl-icon">trending_flat</span>
+      </div>
+      <div class="mt-2 font-label-md text-[11px] text-slate-gray/40"><span id="kpi-pnl-pct" class="tabnum">—</span> since inception</div>
+    </div>
+    <div class="glass-card p-6">
+      <span class="font-label-md text-label-md text-slate-gray/60 uppercase tracking-widest">Buffer to Breach</span>
+      <div class="mt-3 font-stat-lg text-stat-lg tabnum" id="kpi-buffer">—</div>
+      <div class="mt-2 font-label-md text-[11px] text-slate-gray/40"><span id="kpi-buffer-pct" class="tabnum">—</span> of the $1,000 drawdown room intact</div>
+    </div>
+  </section>
+
+  <section class="fade-in glass-card p-6 md:p-8 mb-6">
+    <div class="flex items-start justify-between mb-6">
+      <div>
+        <h2 class="font-headline-md text-[24px] text-on-surface">Account Safety</h2>
+        <p class="font-body-md text-slate-gray/50 mt-1" id="risk-plain">—</p>
+      </div>
+      <span class="material-symbols-outlined text-[28px]" id="risk-icon">verified_user</span>
+    </div>
+    <div class="relative h-4 rounded-full bg-surface-charcoal border border-slate-gray/10 overflow-hidden">
+      <div id="risk-fill" class="absolute left-0 top-0 h-full rounded-full transition-all duration-700" style="width:0%"></div>
+    </div>
+    <div class="flex justify-between mt-3 font-label-md text-[11px] text-slate-gray/40 tabnum">
+      <span>Breach floor <span id="risk-floor">—</span></span>
+      <span>Current <span id="risk-current" class="text-on-surface">—</span></span>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-gray/10">
+      <div><p class="font-label-md text-[10px] text-slate-gray/40 uppercase tracking-widest mb-1">Breach Floor</p><p class="font-body-lg tabnum" id="d-floor">—</p></div>
+      <div><p class="font-label-md text-[10px] text-slate-gray/40 uppercase tracking-widest mb-1">Room Left</p><p class="font-body-lg tabnum" id="d-room">—</p></div>
+      <div><p class="font-label-md text-[10px] text-slate-gray/40 uppercase tracking-widest mb-1">Drawdown Type</p><p class="font-body-lg">EOD trailing</p></div>
+      <div><p class="font-label-md text-[10px] text-slate-gray/40 uppercase tracking-widest mb-1">Daily Loss Limit</p><p class="font-body-lg">None</p></div>
+    </div>
+  </section>
+
+  <section class="fade-in glass-card p-6 md:p-8 mb-6">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="font-headline-md text-[24px] text-on-surface">Equity Curve</h2>
+        <p class="font-body-md text-slate-gray/50 mt-1">Account balance since inception</p>
+      </div>
+      <div class="flex items-center gap-2 font-label-md text-[11px] text-slate-gray/40">
+        <span class="w-3 h-[2px] bg-precision-gold inline-block"></span> Balance
+        <span class="w-3 h-0 border-t border-dashed border-slate-gray/40 inline-block ml-3"></span> Start
+      </div>
+    </div>
+    <div class="w-full overflow-x-auto">
+      <svg id="equity-svg" viewBox="0 0 1000 300" preserveAspectRatio="none" class="w-full h-[260px] min-w-[520px]"></svg>
+    </div>
+    <div id="equity-axis" class="flex justify-between mt-3 font-label-md text-[11px] text-slate-gray/30 tabnum"></div>
+  </section>
+
+  <section class="fade-in grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6">
+    <div class="glass-card p-6 lg:col-span-1">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-precision-gold">payments</span>
+        <h3 class="font-headline-md text-[20px] text-on-surface">Payout Progress</h3>
+      </div>
+      <div class="flex items-baseline justify-between mb-2">
+        <span class="font-body-md text-slate-gray/50">First payout at <span class="tabnum" id="po-target">—</span></span>
+        <span class="font-label-md text-label-md tabnum" id="po-pct">—</span>
+      </div>
+      <div class="relative h-3 rounded-full bg-surface-charcoal border border-slate-gray/10 overflow-hidden">
+        <div id="po-fill" class="absolute left-0 top-0 h-full bg-precision-gold rounded-full transition-all duration-700" style="width:0%"></div>
+      </div>
+      <p class="font-label-md text-[11px] text-slate-gray/40 mt-3 tabnum" id="po-togo">—</p>
+      <div class="mt-5 pt-5 border-t border-slate-gray/10 space-y-2 font-body-md text-slate-gray/60 text-[14px]">
+        <div class="flex justify-between"><span>Profit split</span><span class="text-on-surface" id="po-split">—</span></div>
+        <div class="flex justify-between"><span>Minimum payout</span><span class="text-on-surface tabnum" id="po-min">—</span></div>
+        <div class="flex justify-between"><span>Max per cycle</span><span class="text-on-surface tabnum" id="po-max">—</span></div>
+        <div class="flex justify-between"><span>Live promotion</span><span class="text-on-surface" id="po-promo">—</span></div>
+      </div>
+    </div>
+    <div class="glass-card p-6">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-alpha-amber" id="lock-icon">lock_open</span>
+        <h3 class="font-headline-md text-[20px] text-on-surface">Drawdown Floor</h3>
+      </div>
+      <p class="font-body-md text-slate-gray/60 text-[14px]" id="lock-status">—</p>
+      <div class="mt-5 space-y-3">
+        <div>
+          <div class="flex justify-between font-label-md text-[11px] text-slate-gray/40 mb-1 tabnum">
+            <span>Current EOD high</span><span id="lock-eod">—</span>
+          </div>
+          <div class="relative h-2.5 rounded-full bg-surface-charcoal border border-slate-gray/10 overflow-hidden">
+            <div id="lock-fill" class="absolute left-0 top-0 h-full bg-alpha-amber rounded-full transition-all duration-700" style="width:0%"></div>
+          </div>
+          <div class="flex justify-between font-label-md text-[10px] text-slate-gray/30 mt-1 tabnum">
+            <span>$25,000</span><span>Locks at <span id="lock-target">—</span></span>
+          </div>
+        </div>
+        <p class="font-label-md text-[11px] text-slate-gray/40 leading-relaxed">
+          Once locked, the floor rises to <span id="lock-floor" class="text-on-surface tabnum">—</span>, permanently protecting $100 of profit. The account can never breach below the locked floor.
+        </p>
+      </div>
+    </div>
+    <div class="glass-card p-6">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-precision-gold">balance</span>
+        <h3 class="font-headline-md text-[20px] text-on-surface">Consistency</h3>
+      </div>
+      <div class="flex items-baseline gap-2 mb-2">
+        <span class="font-stat-lg text-[36px] text-on-surface tabnum" id="cons-largest">—</span>
+        <span class="font-body-md text-slate-gray/50">largest day</span>
+      </div>
+      <p class="font-body-md text-slate-gray/60 text-[14px]" id="cons-status">—</p>
+      <p class="font-label-md text-[11px] text-slate-gray/40 mt-4 leading-relaxed">
+        The 50% rule (payouts only): the single largest winning day must stay at or below half of total profit.
+      </p>
+    </div>
+  </section>
+
+  <section class="fade-in glass-card p-6 md:p-8 mb-6">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="font-headline-md text-[24px] text-on-surface">Trade Ledger</h2>
+      <div class="flex gap-6 font-label-md text-[11px] text-slate-gray/40 uppercase tracking-widest">
+        <span>Trades <span id="st-trades" class="text-on-surface tabnum">—</span></span>
+        <span>Win rate <span id="st-wr" class="text-on-surface tabnum">—</span></span>
+        <span>Disciplined <span id="st-disc" class="text-on-surface tabnum">—</span></span>
+      </div>
+    </div>
+    <div class="w-full overflow-x-auto">
+      <table class="w-full min-w-[640px] text-left">
+        <thead>
+          <tr class="font-label-md text-[10px] text-slate-gray/40 uppercase tracking-widest border-b border-slate-gray/10">
+            <th class="py-3 pr-4 font-semibold">#</th>
+            <th class="py-3 pr-4 font-semibold">Date (UTC)</th>
+            <th class="py-3 pr-4 font-semibold">Instrument</th>
+            <th class="py-3 pr-4 font-semibold">Side</th>
+            <th class="py-3 pr-4 font-semibold">Session</th>
+            <th class="py-3 pr-4 font-semibold">Result</th>
+            <th class="py-3 pr-4 font-semibold text-right">P&amp;L</th>
+          </tr>
+        </thead>
+        <tbody id="ledger" class="font-body-md text-[14px]"></tbody>
+      </table>
+    </div>
+    <div id="ledger-notes" class="mt-4 space-y-2"></div>
+  </section>
+
+  <section class="fade-in glass-card p-6 md:p-8 mb-6">
+    <div class="flex items-center gap-2 mb-6">
+      <span class="material-symbols-outlined text-precision-gold">menu_book</span>
+      <h2 class="font-headline-md text-[24px] text-on-surface">How This Account Works</h2>
+    </div>
+    <p class="font-body-md text-slate-gray/55 mb-6 max-w-3xl">
+      Your capital is traded on a <span class="text-on-surface">MyFundedFutures Builder 25K</span> evaluation account.
+      These are the firm's rules that govern the account and any payouts.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4" id="rules-grid"></div>
+  </section>
+
+  <footer class="fade-in border-t border-slate-gray/10 pt-8 pb-16">
+    <p class="font-label-md text-[11px] text-slate-gray/35 leading-relaxed max-w-4xl">
+      <span class="text-slate-gray/50">Important.</span> Inderson Investment Group manages this account on the client's behalf.
+      The account is a simulated ("sim funded") evaluation account provided by MyFundedFutures; balances reflect the firm's
+      simulated trading environment and its rules, not a personal brokerage or bank account. Figures are drawn from the account's
+      trade journal and refreshed periodically — they may lag live platform values. Trading futures carries substantial risk of loss.
+      Past performance does not guarantee future results. Nothing here is investment advice or an offer of securities.
+      © 2026 Inderson Investment Group.
+    </p>
+  </footer>
+</main>
+
+<div id="loading" class="fixed inset-0 flex items-center justify-center">
+  <div class="flex items-center gap-3 text-slate-gray/50 font-label-md text-label-md uppercase tracking-widest">
+    <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading account…
+  </div>
+</div>
+<div id="error" class="fixed inset-0 flex items-center justify-center px-6" style="display:none">
+  <div class="glass-card p-8 max-w-md text-center">
+    <span class="material-symbols-outlined text-risk-crimson text-[40px]">error</span>
+    <p class="font-body-md text-on-surface mt-3" id="error-msg">Unable to load account data.</p>
+    <a href="./login.html" class="inline-block mt-5 px-5 py-2.5 bg-precision-gold text-on-primary font-label-md text-label-md">Back to sign in</a>
+  </div>
+</div>
+
+<script>
+  const SLUG = sessionStorage.getItem("iig_client");
+  if (!sessionStorage.getItem("iig_auth") || !SLUG) {
+    location.replace("./login.html");
+  }
+  document.getElementById("logout").addEventListener("click", () => {
+    sessionStorage.removeItem("iig_auth"); sessionStorage.removeItem("iig_client");
+    location.replace("./login.html");
+  });
+
+  const usd = (n, dp = 0) => (n < 0 ? "-$" : "$") + Math.abs(n).toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  const el = (id) => document.getElementById(id);
+
+  function fmtDate(iso, withTime) {
+    const d = new Date(iso);
+    const opt = withTime
+      ? { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "UTC", hour12: false }
+      : { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" };
+    return d.toLocaleString("en-GB", opt).replace(",", "");
+  }
+
+  function render(d) {
+    const a = d.account, p = d.payout, c = d.consistency, s = d.stats, r = d.rules;
+
+    el("hdr-name").textContent = d.client.name;
+    el("acct-title").textContent = `${d.firm} · ${d.plan}`;
+    const L = d.login;
+    el("acct-login").textContent = L.length > 6 ? L.slice(0, 4) + "••••" + L.slice(-4) : L;
+    el("updated").textContent = fmtDate(d.updated, true) + " UTC";
+
+    const good = a.status.toLowerCase() === "active";
+    const pill = el("status-pill"), dot = pill.querySelector("span");
+    el("status-text").textContent = a.status;
+    if (good) { pill.classList.add("border-success-emerald/40", "text-success-emerald"); dot.classList.add("bg-success-emerald"); }
+    else { pill.classList.add("border-risk-crimson/40", "text-risk-crimson"); dot.classList.add("bg-risk-crimson"); }
+
+    el("kpi-balance").textContent = usd(a.balance, 2);
+    el("kpi-start").textContent = usd(a.startingBalance);
+    const pnlUp = a.netPnl >= 0;
+    const pnlEl = el("kpi-pnl");
+    pnlEl.textContent = (pnlUp ? "+" : "-") + "$" + Math.abs(a.netPnl).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    pnlEl.classList.add(pnlUp ? "text-success-emerald" : "text-risk-crimson");
+    const ic = el("kpi-pnl-icon");
+    ic.textContent = pnlUp ? "trending_up" : "trending_down";
+    ic.classList.add(pnlUp ? "text-success-emerald" : "text-risk-crimson");
+    el("kpi-pnl-pct").textContent = (pnlUp ? "+" : "") + a.netPnlPct + "%";
+    el("kpi-buffer").textContent = usd(a.distanceToBreach);
+    el("kpi-buffer").classList.add(a.distanceToBreach >= 600 ? "text-success-emerald" : a.distanceToBreach >= 300 ? "text-alpha-amber" : "text-risk-crimson");
+    el("kpi-buffer-pct").textContent = a.bufferRemainingPct + "%";
+
+    const room = a.distanceToBreach, maxRoom = a.maxDrawdown;
+    const pct = Math.max(0, Math.min(100, (room / maxRoom) * 100));
+    const color = room >= 600 ? "#2E7D32" : room >= 300 ? "#E2B15B" : "#D32F2F";
+    const fill = el("risk-fill");
+    fill.style.width = pct + "%"; fill.style.background = color;
+    el("risk-floor").textContent = usd(a.breachFloor);
+    el("risk-current").textContent = usd(a.balance, 2);
+    el("d-floor").textContent = usd(a.breachFloor);
+    el("d-room").textContent = usd(room);
+    el("risk-icon").textContent = room >= 600 ? "verified_user" : room >= 300 ? "shield" : "warning";
+    el("risk-icon").style.color = color;
+    el("risk-plain").innerHTML = `The account can absorb <span class="text-on-surface tabnum">${usd(room)}</span> of further loss before the challenge fails — ${a.bufferRemainingPct}% of the safety margin is intact.`;
+
+    drawEquity(d.equityCurve, a.startingBalance);
+
+    el("po-target").textContent = usd(p.target);
+    el("po-pct").textContent = p.progressPct + "%";
+    el("po-fill").style.width = Math.max(1.5, p.progressPct) + "%";
+    el("po-togo").textContent = p.eligible ? "Eligible for first payout" : `${usd(p.toGo)} of profit to reach the first payout`;
+    el("po-split").textContent = p.split;
+    el("po-min").textContent = usd(p.minPayout);
+    el("po-max").textContent = usd(p.maxPerCycle) + " / cycle";
+    el("po-promo").textContent = `After ${p.promotionAfter} payouts`;
+
+    el("lock-status").textContent = a.floorLocked
+      ? "Locked — $100 of profit is now permanently protected."
+      : "Not yet locked. The floor still trails your end-of-day highs upward.";
+    el("lock-icon").textContent = a.floorLocked ? "lock" : "lock_open";
+    el("lock-eod").textContent = usd(a.eodHigh);
+    el("lock-target").textContent = usd(a.lockAtEodHigh);
+    el("lock-floor").textContent = usd(a.lockedFloor);
+    const lockPct = Math.max(0, Math.min(100, ((a.eodHigh - a.startingBalance) / (a.lockAtEodHigh - a.startingBalance)) * 100));
+    el("lock-fill").style.width = lockPct + "%";
+
+    el("cons-largest").textContent = c.largestDayPct == null ? "—" : c.largestDayPct + "%";
+    el("cons-status").textContent = c.status;
+    el("cons-status").classList.add(c.pass ? "text-slate-gray/60" : "text-risk-crimson");
+
+    el("st-trades").textContent = s.trades;
+    el("st-wr").textContent = s.winRatePct + "%";
+    el("st-disc").textContent = s.disciplinedTrades + "/" + s.trades;
+    const tb = el("ledger"); tb.innerHTML = "";
+    const notes = el("ledger-notes"); notes.innerHTML = "";
+    d.trades.slice().reverse().forEach(t => {
+      const win = t.pnl >= 0;
+      const tr = document.createElement("tr");
+      tr.className = "border-b border-slate-gray/5 hover:bg-precision-gold/[0.03] transition-colors";
+      tr.innerHTML = `
+        <td class="py-3 pr-4 text-slate-gray/40 tabnum">${t.n}</td>
+        <td class="py-3 pr-4 text-slate-gray/70 tabnum whitespace-nowrap">${fmtDate(t.date, true)}</td>
+        <td class="py-3 pr-4 text-on-surface">${t.pair}</td>
+        <td class="py-3 pr-4"><span class="${t.position === "Long" ? "text-success-emerald" : "text-risk-crimson"}">${t.position}</span></td>
+        <td class="py-3 pr-4 text-slate-gray/70">${t.session}</td>
+        <td class="py-3 pr-4"><span class="px-2 py-0.5 text-[11px] font-label-md uppercase tracking-wider ${win ? "text-success-emerald bg-success-emerald/10" : "text-risk-crimson bg-risk-crimson/10"}">${t.result}</span></td>
+        <td class="py-3 pr-4 text-right tabnum ${win ? "text-success-emerald" : "text-risk-crimson"}">${(win ? "+" : "-") + "$" + Math.abs(t.pnl).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>`;
+      tb.appendChild(tr);
+      if (t.commentary) {
+        const n = document.createElement("p");
+        n.className = "font-label-md text-[11px] text-slate-gray/40 leading-relaxed";
+        n.innerHTML = `<span class="text-precision-gold/70">Trade № ${t.n}:</span> ${t.commentary}`;
+        notes.appendChild(n);
+      }
+    });
+
+    const rows = [
+      ["Starting balance", usd(r.startingBalance)],
+      ["Max drawdown", usd(r.maxDrawdown) + " · " + r.drawdownType],
+      ["Daily loss limit", r.dailyLossLimit],
+      ["Minimum trading days", r.minTradingDays + " day"],
+      ["Profit split", r.profitSplit],
+      ["First payout", r.firstPayout],
+      ["Minimum payout", usd(r.minPayout)],
+      ["Max payout / cycle", usd(r.maxPayoutPerCycle)],
+      ["Consistency rule", r.consistencyRule],
+      ["Contracts", r.contracts],
+      ["News trading", r.newsTrading],
+      ["Live promotion", r.promotion]
+    ];
+    const g = el("rules-grid"); g.innerHTML = "";
+    rows.forEach(([k, v]) => {
+      const div = document.createElement("div");
+      div.className = "flex justify-between gap-6 py-2 border-b border-slate-gray/5";
+      div.innerHTML = `<span class="font-body-md text-slate-gray/50 text-[14px] shrink-0">${k}</span><span class="font-body-md text-on-surface text-[14px] text-right">${v}</span>`;
+      g.appendChild(div);
+    });
+    const det = document.createElement("div");
+    det.className = "md:col-span-2 pt-3";
+    det.innerHTML = `<p class="font-label-md text-[11px] text-slate-gray/40 leading-relaxed">${r.drawdownDetail}</p>`;
+    g.appendChild(det);
+
+    el("loading").style.display = "none";
+    el("app").style.display = "block";
+  }
+
+  function drawEquity(points, start) {
+    const svg = el("equity-svg");
+    const W = 1000, H = 300, padL = 8, padR = 8, padT = 20, padB = 20;
+    const eqs = points.map(p => p.equity);
+    let lo = Math.min(...eqs, start), hi = Math.max(...eqs, start);
+    const span = hi - lo || 250;
+    lo -= span * 0.6; hi += span * 0.6;
+    const x = i => padL + (i / Math.max(1, points.length - 1)) * (W - padL - padR);
+    const y = v => padT + (1 - (v - lo) / (hi - lo)) * (H - padT - padB);
+    const line = points.map((p, i) => `${x(i)},${y(p.equity)}`).join(" ");
+    const area = `${padL},${H - padB} ` + line + ` ${x(points.length - 1)},${H - padB}`;
+    const startY = y(start);
+    const up = points[points.length - 1].equity >= start;
+    const col = up ? "#2E7D32" : "#C9A96E";
+    svg.innerHTML = `
+      <defs><linearGradient id="eg" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="${col}" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="${col}" stop-opacity="0"/>
+      </linearGradient></defs>
+      <line x1="${padL}" y1="${startY}" x2="${W - padR}" y2="${startY}" stroke="rgba(212,208,200,0.35)" stroke-width="1" stroke-dasharray="5 5"/>
+      <polygon points="${area}" fill="url(#eg)"/>
+      <polyline points="${line}" fill="none" stroke="${col}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      ${points.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.equity)}" r="4.5" fill="#0A0A0A" stroke="${col}" stroke-width="2.5"/>`).join("")}
+    `;
+    const axis = el("equity-axis"); axis.innerHTML = "";
+    points.forEach(p => { const sp = document.createElement("span"); sp.textContent = p.label; axis.appendChild(sp); });
+  }
+
+  fetch(`./data/${SLUG}.json`, { cache: "no-store" })
+    .then(res => { if (!res.ok) throw new Error("not found"); return res.json(); })
+    .then(render)
+    .catch(() => {
+      el("loading").style.display = "none";
+      el("error").style.display = "flex";
+      el("error-msg").textContent = "We couldn't load this account's data right now. Please try again shortly.";
+    });
+</script>
+</body></html>
